@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "consoleColorer.h"
+#include "inputManager.h"
 
 class Game
 {
@@ -20,7 +21,7 @@ private:
 	void initializeSimulationSettings();
 
 	// All game logic
-	void update(float dt);
+	void update(sf::RenderWindow* window, float dt);
 
 	// All rendering
 	void draw(sf::RenderWindow* window);

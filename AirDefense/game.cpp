@@ -7,6 +7,9 @@ void Game::initialize()
 
 	initializeSimulationSettings();
 
+	// Setup Keyboard
+	InputManager::getInstance().addKey(sf::Keyboard::Space);
+
 }
 
 void Game::initializeWindowSettings(sf::RenderWindow* window)
@@ -48,23 +51,39 @@ void Game::begin()
 			{
 				window.close();
 			}
+
+			InputManager::getInstance().krUpdate(e);
 		}
 
 		sf::Time elapsed = clock.restart();
 
-		update(elapsed.asSeconds());
+		update(&window, elapsed.asSeconds());
 		
 		draw(&window);
+
+		InputManager::getInstance().stateUpdate();
 	}
+}
+
+void Game::update(sf::RenderWindow* window, float dt)
+{
+	if (InputManager::getInstance().keyRelease(sf::Keyboard::Escape))
+	{
+		printf("\n\n+================================================+\n");
+		printf("\t\t  Closing Game\n");
+		printf("+================================================+\n\n");
+		window->close();
+	}
+
+	if (InputManager::getInstance().keyPress(sf::Keyboard::Space))
+		printf("Space was pressed\n");
+	if (InputManager::getInstance().keyRelease(sf::Keyboard::Space))
+		printf("Space is released\n");
+
+	
 }
 
 void Game::draw(sf::RenderWindow* window)
 {
-	// Example drawing code
 
-}
-
-void Game::update(float dt)
-{
-	
 }
