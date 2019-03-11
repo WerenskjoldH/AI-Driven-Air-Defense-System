@@ -1,6 +1,9 @@
 #ifndef INPUT_MANAGER_H
 #define INPUT_MANAGER_H
 
+#define MOUSE_LMB 1
+#define MOUSE_RMB 0
+
 #include <SFML/Graphics.hpp>
 
 #include <map>
@@ -21,10 +24,24 @@ struct Key
 	Key() : curState{0}, prevState{0} {}
 };
 
+struct Mouse
+{
+	bool curLMB;
+	bool prevLMB;
+
+	bool curRMB;
+	bool prevRMB;
+
+	sf::Vector2i position;
+
+	Mouse() : curLMB{ 0 }, prevLMB{ 0 }, curRMB{ 0 }, prevRMB{ 0 } {}
+};
+
 class InputManager
 {
 private:
 	std::map<int, Key*> keys;
+	Mouse mouse;
 
 	InputManager()
 	{
@@ -54,8 +71,16 @@ public:
 	bool keyPress(int key);
 	bool keyRelease(int key);
 
+	// Check mouse state
+	bool mouseDown(int mouseButton);
+	bool mouseUp(int mouseButton);
+	bool mousePress(int mouseButton);
+	bool mouseRelease(int mouseButton);
+
+	sf::Vector2i mousePosition();
+
 	// Keeps track of key states
-	void stateUpdate();
+	void stateUpdate(sf::RenderWindow* window);
 	// Keeps track of key events
 	void krUpdate(sf::Event e);
 

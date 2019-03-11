@@ -57,7 +57,69 @@ bool InputManager::keyRelease(int key)
 	return false;
 }
 
-void InputManager::stateUpdate()
+bool InputManager::mouseDown(int mouseButton)
+{
+	if (mouseButton)
+	{
+		if (mouse.curLMB)
+			return true;
+	}
+	else {
+		if (mouse.curRMB)
+			return true;
+	}
+	return false;
+}
+
+bool InputManager::mouseUp(int mouseButton)
+{
+	if (mouseButton)
+	{
+		if (!mouse.curLMB)
+			return true;
+	}
+	else {
+		if (!mouse.curRMB)
+			return true;
+	}
+	return false;
+}
+
+bool InputManager::mousePress(int mouseButton)
+{
+	if (mouseButton)
+	{
+		if (mouse.curLMB && !mouse.prevLMB)
+			return true;
+	}
+	else {
+		if (mouse.curRMB && !mouse.prevRMB)
+			return true;
+	}
+	return false;
+}
+
+bool InputManager::mouseRelease(int mouseButton)
+{
+	if (mouseButton)
+	{
+		if (!mouse.curLMB && mouse.prevLMB)
+			return true;
+	}
+	else {
+		if (!mouse.curRMB && mouse.prevRMB)
+			return true;
+	}
+
+	return false;
+}
+
+sf::Vector2i InputManager::mousePosition()
+{
+	return mouse.position;
+}
+
+void InputManager::stateUpdate(sf::RenderWindow* window)
 {
 	std::map<int, Key*>::iterator it;
 
@@ -67,6 +129,11 @@ void InputManager::stateUpdate()
 		Key* k = it->second;
 		k->prevState = k->curState;
 	}
+
+	mouse.position = sf::Mouse::getPosition(*window);
+
+	mouse.prevLMB = mouse.curLMB;
+	mouse.prevRMB = mouse.curRMB;
 }
 
 void InputManager::krUpdate(sf::Event e)
@@ -76,4 +143,16 @@ void InputManager::krUpdate(sf::Event e)
 
 	if (e.type == sf::Event::KeyPressed)
 		keys.find(e.key.code)->second->curState = 1;
+
+	if (e.mouseButton.button == sf::Mouse::Right)
+		if (e.type == sf::Event::MouseButtonPressed)
+			mouse.curRMB = 1;
+		else
+			mouse.curRMB = 0;
+	
+	if (e.mouseButton.button == sf::Mouse::Left)
+		if (e.type == sf::Event::MouseButtonPressed)
+			mouse.curLMB = 1;
+		else
+			mouse.curLMB = 0;
 }

@@ -61,7 +61,7 @@ void Game::begin()
 		
 		draw(&window);
 
-		InputManager::getInstance().stateUpdate();
+		InputManager::getInstance().stateUpdate(&window);
 	}
 }
 
@@ -75,11 +75,23 @@ void Game::update(sf::RenderWindow* window, float dt)
 		window->close();
 	}
 
+	// Input Testing - Will be removed
 	if (InputManager::getInstance().keyPress(sf::Keyboard::Space))
 		printf("Space was pressed\n");
 	if (InputManager::getInstance().keyRelease(sf::Keyboard::Space))
 		printf("Space is released\n");
+	
+	if (InputManager::getInstance().mousePress(MOUSE_LMB))
+		printf("Mouse LMB was pressed at location <%i, %i>\n", InputManager::getInstance().mousePosition().x, InputManager::getInstance().mousePosition().y);
 
+	if (InputManager::getInstance().mousePress(MOUSE_RMB))
+		printf("Mouse RMB was pressed at location <%i, %i>\n", InputManager::getInstance().mousePosition().x, InputManager::getInstance().mousePosition().y);
+
+	if (InputManager::getInstance().mouseRelease(MOUSE_LMB))
+		printf("Mouse LMB was released at location <%i, %i>\n", InputManager::getInstance().mousePosition().x, InputManager::getInstance().mousePosition().y);
+
+	if (InputManager::getInstance().mouseRelease(MOUSE_RMB))
+		printf("Mouse RMB was released at location <%i, %i>\n", InputManager::getInstance().mousePosition().x, InputManager::getInstance().mousePosition().y);
 	
 }
 
