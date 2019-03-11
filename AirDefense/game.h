@@ -4,6 +4,10 @@
 #define WINDOW_WIDTH	800
 #define WINDOW_HEIGHT	800
 
+#define BACKGROUND_COLOR sf::Color::Black
+
+#define IM InputManager::getInstance()
+
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
