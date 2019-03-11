@@ -2,9 +2,9 @@
 
 bool InputManager::isBound(int key)
 {
-	if (InputManager::keys.find(key) != InputManager::keys.end())
-		return true;
-	return false;
+	if (InputManager::keys.count(key) == 0)
+		return false;
+	return true;
 }
 
 void InputManager::addKey(sf::Keyboard::Key key)
@@ -139,10 +139,12 @@ void InputManager::stateUpdate(sf::RenderWindow* window)
 void InputManager::krUpdate(sf::Event e)
 {
 	if (e.type == sf::Event::KeyReleased)
-		keys.find(e.key.code)->second->curState = 0;
+		if(InputManager::isBound(e.key.code))
+			keys.find(e.key.code)->second->curState = 0;
 
 	if (e.type == sf::Event::KeyPressed)
-		keys.find(e.key.code)->second->curState = 1;
+		if (InputManager::isBound(e.key.code))
+			keys.find(e.key.code)->second->curState = 1;
 
 	if (e.mouseButton.button == sf::Mouse::Right)
 		if (e.type == sf::Event::MouseButtonPressed)

@@ -1,5 +1,7 @@
 #include "game.h"
+#include "noiseGenerator.h"
 
+sf::Image world;
 void Game::initialize()
 {
 	// Error message is built into function
@@ -9,6 +11,12 @@ void Game::initialize()
 
 	// Setup Keyboard
 	IM.addKey(sf::Keyboard::Space);
+
+	world.create(WINDOW_WIDTH, WINDOW_HEIGHT, sf::Color::White);
+	setHeightfield(&world, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	
+	
 
 }
 
@@ -101,7 +109,19 @@ void Game::update(sf::RenderWindow* window, float dt)
 
 void Game::draw(sf::RenderWindow* window)
 {
+
+	// Remove the texture and sprite initializations from here as soon as possible, just here for testing
+	sf::Texture texture;
+	texture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+	texture.update(world);
+
+	sf::Sprite sprite;
+	sprite.setTexture(texture);
+
+	window->draw(sprite);
+
 	sf::CircleShape circle(10);
+	circle.setFillColor(sf::Color(0,0,255,255));
 	circle.setPosition(float(IM.mousePosition().x - 10), float(IM.mousePosition().y - 10));
 
 	window->draw(circle);
