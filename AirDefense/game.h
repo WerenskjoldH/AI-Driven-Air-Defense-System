@@ -1,6 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
+#define WINDOW_WIDTH	800
+#define WINDOW_HEIGHT	800
+
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -9,18 +12,18 @@
 class Game
 {
 private:
-	// The render window that all data will be written to
-	sf::RenderWindow window;
-
 	// This is the default font we will use
 	sf::Font font;
 
 	void initialize();
-	void initializeWindowSettings(sf::RenderWindow& window);
+	void initializeWindowSettings(sf::RenderWindow* window);
+	void initializeSimulationSettings();
 
-	void update();
+	// All game logic
+	void update(float dt);
 
-	void draw();
+	// All rendering
+	void draw(sf::RenderWindow* window);
 
 public:
 	// We will define the constructor and destructor locally in the header file
