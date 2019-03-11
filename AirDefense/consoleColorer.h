@@ -1,6 +1,16 @@
 #ifndef CONSOLE_COLORIZER_H
 #define CONSOLE_COLORIZER_H
 
+#define FONT_BLACK		0
+#define FONT_BLUE		1
+#define FONT_GREEN		2
+#define FONT_CYAN		3
+#define FONT_RED		4
+#define FONT_MAGENTA	5
+#define FONT_BROWN		6
+#define FONT_YELLOW		14
+#define FONT_WHITE		15
+
 #include <Windows.h>
 #include <iostream>
 
@@ -46,7 +56,7 @@ public:
 		14	-	YELLOW
 		15	-	WHITE
 	*/
-	void setTextColor(int c)
+	void setTextColor(int c = 15)
 	{
 		if (c < 0 || c > 15)
 		{
