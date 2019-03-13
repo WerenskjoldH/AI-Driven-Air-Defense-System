@@ -8,7 +8,7 @@
 class Geography
 {
 public:
-	Geography(int sizeX, int sizeY, float frequency = 2 ^ 4, float zoom = 1.0, float amplitude = 1.0, int seed = 9996) : worldSizeX{ sizeX }, worldSizeY{ sizeY }, frequency{ frequency }, zoom{ zoom }, amplitude{ amplitude }, seed{ seed }
+	Geography(int sizeX, int sizeY, float frequency = 2 ^ 4, float zoom = 1.0, float amplitude = 1.0, float waterLevel = 0.5, int seed = 9996) : worldSizeX{ sizeX }, worldSizeY{ sizeY }, frequency{ frequency }, zoom{ zoom }, amplitude{ amplitude }, waterLevel{ waterLevel }, seed{ seed }
 	{
 		mapImage.create(sizeX, sizeY);
 
@@ -36,6 +36,13 @@ public:
 
 	void drawLand(sf::RenderWindow* window);
 
+	void setFrequency(float f) { frequency = f; }
+	void setZoom(float z) { zoom = z; }
+	void setAmplitude(float a) { amplitude = a; }
+
+	// Value must be in interval [0,1]
+	void setWaterLevel(float w) { waterLevel = (w <= 1 && w >= 0) ? w : waterLevel;  }
+
 private:
 	sf::Image mapImage;
 	sf::Sprite mapSprite;
@@ -44,6 +51,7 @@ private:
 	float frequency;
 	float zoom;
 	float amplitude;
+	float waterLevel;
 	int seed;
 
 	void generateLand();

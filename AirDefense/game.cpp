@@ -24,7 +24,7 @@ void Game::initializeKeyboardSettings()
 
 void Game::initializeSimulationSettings()
 {
-	world = new Geography(WINDOW_WIDTH, WINDOW_HEIGHT);
+	world = new Geography(WINDOW_WIDTH, WINDOW_HEIGHT, 6, 1, 1, 0.4);
 }
 
 void Game::begin()
@@ -80,6 +80,13 @@ void Game::update(sf::RenderWindow* window, float dt)
 		printf("\t\t  Closing Game\n");
 		printf("+================================================+\n\n");
 		window->close();
+	}
+
+	if (IM.keyPress(sf::Keyboard::Space))
+	{
+		SET_FONT_COLOR(FONT_BLUE);
+		printf("Land is regenerating...\n");
+		SET_FONT_COLOR();
 	}
 
 	// Regenerate landmasses
