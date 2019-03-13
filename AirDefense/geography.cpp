@@ -42,11 +42,11 @@ void Geography::generateLand()
 			float noiseX = (float)ctrX / (float)worldSizeX;
 			float noiseY = (float)ctrY / (float)worldSizeY;
 
-			float v = (getPerlinNoise(noiseX * frequency + seed, noiseY * frequency + seed) + 1.0) / 2.0f;
+			float v = (getPerlinNoise(noiseX * frequency / zoom + seed, noiseY * frequency / zoom + seed) + 1.0) / 2.0f;
 			float e = std::pow(v, 1.78);
 			int color;
 
-			if (e > 0.5f)
+			if (e > waterLevel)
 				color = 255;
 			else
 				color = 0;
