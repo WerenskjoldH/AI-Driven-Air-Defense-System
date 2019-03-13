@@ -5,19 +5,10 @@ sf::Image world;
 void Game::initialize()
 {
 	// Error message is built into function
-	font.loadFromFile("Fonts/slkscr.ttf");
+	defaultFont.loadFromFile("Fonts/slkscr.ttf");
 
+	initializeKeyboardSettings();
 	initializeSimulationSettings();
-
-	// Setup Keyboard
-	IM.addKey(sf::Keyboard::Space);
-
-	world.create(WINDOW_WIDTH, WINDOW_HEIGHT, sf::Color::White);
-	setHeightfield(&world, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-	
-	
-
 }
 
 void Game::initializeWindowSettings(sf::RenderWindow* window)
@@ -28,9 +19,15 @@ void Game::initializeWindowSettings(sf::RenderWindow* window)
 	window->setFramerateLimit(60);
 }
 
+void Game::initializeKeyboardSettings()
+{
+	IM.addKey(sf::Keyboard::Space);
+}
+
 void Game::initializeSimulationSettings()
 {
-
+	world.create(WINDOW_WIDTH, WINDOW_HEIGHT, sf::Color::White);
+	setHeightfield(&world, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 void Game::begin()
@@ -91,8 +88,12 @@ void Game::update(sf::RenderWindow* window, float dt)
 	if (IM.keyPress(sf::Keyboard::Space))
 		printf("Space was pressed\n");
 	if (IM.keyRelease(sf::Keyboard::Space))
+	{
+		srand(std::time(0));
+		setHeightfield(&world, WINDOW_WIDTH, WINDOW_HEIGHT, rand() % 10000);
 		printf("Space is released\n");
-	
+	}
+
 	if (IM.mousePress(MOUSE_LMB))
 		printf("Mouse LMB was pressed at location <%i, %i>\n", IM.mousePosition().x, IM.mousePosition().y);
 

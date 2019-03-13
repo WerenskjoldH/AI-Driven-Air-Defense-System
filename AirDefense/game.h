@@ -18,10 +18,11 @@ class Game
 {
 private:
 	// This is the default font we will use
-	sf::Font font;
+	sf::Font defaultFont;
 
 	void initialize();
 	void initializeWindowSettings(sf::RenderWindow* window);
+	void initializeKeyboardSettings();
 	void initializeSimulationSettings();
 
 	// All game logic
