@@ -7,18 +7,24 @@
 #define BACKGROUND_COLOR sf::Color::Black
 
 #define IM InputManager::getInstance()
+#define SET_FONT_COLOR(c) Colorizer::getInstance().setTextColor(c)
+
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
 #include "consoleColorer.h"
 #include "inputManager.h"
+#include "geography.h"
 
 class Game
 {
 private:
 	// This is the default font we will use
 	sf::Font defaultFont;
+
+	// Geography data, this should be refactored into a World class later on
+	Geography* world;
 
 	void initialize();
 	void initializeWindowSettings(sf::RenderWindow* window);

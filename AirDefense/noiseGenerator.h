@@ -5,8 +5,6 @@
 
 #define PI 3.141592653589
 
-#include <SFML/Graphics.hpp>
-
 static float cosineInterpolation(float a, float b, float x)
 {
 	float ft = x * PI;
@@ -38,33 +36,5 @@ static float getPerlinNoise(float nX, float nY)
 
 	return cosineInterpolation(lerp1, lerp2, nY - fY);
 }
-
-static void setHeightfield(sf::Image* image, int x, int y, int seed = 9996)
-{
-	sf::Uint8* map = new sf::Uint8[4 * (y*x)];
-
-	int ctrX, ctrY;
-	for (ctrX = 0; ctrX < x; ctrX++)
-		for (ctrY = 0; ctrY < y; ctrY++)
-		{
-			float noiseX = (float)ctrX / (float)x, noiseY = (float)ctrY / (float)y;
-
-			float v = (getPerlinNoise(noiseX * (2^4) + seed, noiseY * (2^4) + seed) + 1.0) / 2.0f;
-			float e = std::pow(v, 1.78);
-			int color;
-
-			if (e > 0.5f)
-				color = 255;
-			else
-				color = 0;
-
-			image->setPixel(ctrX, ctrY, sf::Color(color, color, color, 255));
-		}
-
-	printf("We made it to the end of the height field!\n");
-
-	delete[] map;
-}
-
 
 #endif

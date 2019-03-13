@@ -1,7 +1,5 @@
 #include "game.h"
-#include "noiseGenerator.h"
 
-sf::Image world;
 void Game::initialize()
 {
 	// Error message is built into function
@@ -26,8 +24,7 @@ void Game::initializeKeyboardSettings()
 
 void Game::initializeSimulationSettings()
 {
-	world.create(WINDOW_WIDTH, WINDOW_HEIGHT, sf::Color::White);
-	setHeightfield(&world, WINDOW_WIDTH, WINDOW_HEIGHT);
+	world = new Geography(WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 void Game::begin()
@@ -76,6 +73,7 @@ void Game::begin()
 
 void Game::update(sf::RenderWindow* window, float dt)
 {
+	// Close the game
 	if (IM.keyRelease(sf::Keyboard::Escape))
 	{
 		printf("\n\n+================================================+\n");
@@ -84,42 +82,29 @@ void Game::update(sf::RenderWindow* window, float dt)
 		window->close();
 	}
 
-	// Input Testing - Will be removed
-	if (IM.keyPress(sf::Keyboard::Space))
-		printf("Space was pressed\n");
+	// Regenerate landmasses
 	if (IM.keyRelease(sf::Keyboard::Space))
 	{
 		srand(std::time(0));
-		setHeightfield(&world, WINDOW_WIDTH, WINDOW_HEIGHT, rand() % 10000);
-		printf("Space is released\n");
+		world->regenerate(rand() % 10000);
+		SET_FONT_COLOR(FONT_GREEN);
+		printf("Land has been regenerated\n");
+		SET_FONT_COLOR();
 	}
 
 	if (IM.mousePress(MOUSE_LMB))
-		printf("Mouse LMB was pressed at location <%i, %i>\n", IM.mousePosition().x, IM.mousePosition().y);
-
-	if (IM.mousePress(MOUSE_RMB))
-		printf("Mouse RMB was pressed at location <%i, %i>\n", IM.mousePosition().x, IM.mousePosition().y);
-
-	if (IM.mouseRelease(MOUSE_LMB))
-		printf("Mouse LMB was released at location <%i, %i>\n", IM.mousePosition().x, IM.mousePosition().y);
-
-	if (IM.mouseRelease(MOUSE_RMB))
-		printf("Mouse RMB was released at location <%i, %i>\n", IM.mousePosition().x, IM.mousePosition().y);
+	{
+		if (world->checkIfLand(IM.mousePosition().x, IM.mousePosition().y))
+			printf("You clicked land!\n");
+		else
+			printf("You clicked water!\n");
+	}
 	
 }
 
 void Game::draw(sf::RenderWindow* window)
 {
-
-	// Remove the texture and sprite initializations from here as soon as possible, just here for testing
-	sf::Texture texture;
-	texture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
-	texture.update(world);
-
-	sf::Sprite sprite;
-	sprite.setTexture(texture);
-
-	window->draw(sprite);
+	world->drawLand(window);
 
 	sf::CircleShape circle(10);
 	circle.setFillColor(sf::Color(0,0,255,255));
