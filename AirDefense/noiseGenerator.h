@@ -5,23 +5,24 @@
 
 #define PI 3.141592653589
 
-static float cosineInterpolation(float a, float b, float x)
+inline static float cosineInterpolation(float a, float b, float x)
 {
 	float ft = x * PI;
 	float f = (1 - std::cos(ft)) * 0.5f;
 	return (a * (1 - f) + b * f);
 }
 
-// This is a commonly used function to generate a noise field, don't question it too much. Has to do with prime numbers or something like that
-static float getNoise(float nX, float nY)
+// This is a commonly used function to generate a noise field
+// It uses prime numbers as non-prime numbers create distict patterns
+inline static float getNoise(float nX, float nY)
 {
 	int n = (int)nX + (int)nY * 57;
-	n = (n << 13) ^ n;
-	int nn = (n*(n*n * 60493 + 19990303) + 1376312589) & 0x7fffffff;
+	n = (n * 2^13) ^ n;
+	int nn = std::abs((n*(n*n * 60493 + 19990303) + 1376312589));
 	return 1.0 - ((double)nn / 1073741824.f);
 }
 
-static float getPerlinNoise(float nX, float nY)
+inline static float getPerlinNoise(float nX, float nY)
 {
 	float fX = std::floor(nX);
 	float fY = std::floor(nY);
