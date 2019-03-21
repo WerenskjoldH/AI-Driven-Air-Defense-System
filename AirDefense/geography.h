@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "noiseGenerator.h"
+#include "consoleColorer.h"
 
 class Geography
 {
@@ -14,6 +15,10 @@ public:
 
 		mapTexture.create(sizeX, sizeY);
 
+		if (!sf::Shader::isAvailable())
+		{
+			WRITE_CONSOLE_ERROR("SHADER", "System does not have support for shaders");
+		}
 		generateLand();
 
 		mapTexture.update(mapImage);
@@ -47,6 +52,8 @@ private:
 	sf::Image mapImage;
 	sf::Sprite mapSprite;
 	sf::Texture mapTexture;
+	sf::Shader geographyShader;
+
 	int worldSizeX, worldSizeY;
 	float frequency;
 	float zoom;

@@ -7,7 +7,6 @@
 #define BACKGROUND_COLOR sf::Color::Black
 
 #define IM InputManager::getInstance()
-#define SET_FONT_COLOR(c) Colorizer::getInstance().setTextColor(c)
 
 
 #include <SFML/Window.hpp>
