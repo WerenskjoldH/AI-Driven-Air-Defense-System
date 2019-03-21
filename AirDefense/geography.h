@@ -64,7 +64,7 @@ public:
 	void setAmplitude(float a) { amplitude = a; }
 
 	// Value must be in interval [0,1]
-	void setWaterLevel(float w) { waterLevel = (w <= 1 && w >= 0) ? w : waterLevel;  }
+	void setWaterLevel(float w) { waterLevel = (w <= 1 && w >= 0) ? w : waterLevel; }
 
 private:
 	sf::Image mapImage;

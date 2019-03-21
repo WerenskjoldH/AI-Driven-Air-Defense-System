@@ -26,7 +26,7 @@ void Game::initializeKeyboardSettings()
 
 void Game::initializeSimulationSettings()
 {
-	world = new Geography(WINDOW_WIDTH, WINDOW_HEIGHT, 6, 1, 1, 0.4);
+	world = new Geography(WINDOW_WIDTH, WINDOW_HEIGHT, 6, 0.9, 1, 0.4);
 }
 
 void Game::begin()
@@ -116,7 +116,7 @@ void Game::draw(sf::RenderWindow* window)
 	world->drawLand(window);
 
 	sf::CircleShape circle(5);
-	circle.setFillColor(sf::Color(144,144,144,255));
+	circle.setFillColor(sf::Color(80,80,80,255));
 	circle.setPosition(float(IM.mousePosition().x - 5), float(IM.mousePosition().y - 5));
 
 	window->draw(circle);
