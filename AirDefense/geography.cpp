@@ -38,6 +38,8 @@ void Geography::drawLand(sf::RenderWindow * window)
 
 void Geography::generateLand()
 {
+	int color;
+
 	int ctrX, ctrY;
 	for (ctrX = 0; ctrX < worldSizeX; ctrX++)
 		for (ctrY = 0; ctrY < worldSizeY; ctrY++)
@@ -45,12 +47,17 @@ void Geography::generateLand()
 			float noiseX = (float)ctrX / (float)worldSizeX;
 			float noiseY = (float)ctrY / (float)worldSizeY;
 
-			float v = (getPerlinNoise(noiseX * frequency / zoom + seed, noiseY * frequency / zoom + seed) + 1.0) / 2.0f
+			float n1 = getPerlinNoise(noiseX * frequency / zoom + seed, noiseY * frequency / zoom + seed);
+			float n2 = getPerlinNoise(2.0 * noiseX * frequency / zoom + seed, 2.0 * noiseY * frequency / zoom + seed);
+			float n3 = getPerlinNoise(4.0 * noiseX * frequency / zoom + seed, 4.0 * noiseY * frequency / zoom + seed);
+
+			float elevation = n1 + 0.5 * n2 + 0.25 * n3; 
+
+			float v = std::min((elevation + 1.0) / 2.0, 1.0);
 			float e = std::pow(v, 0.74);
-			int color;
+
 
 			color = 255 * e;
-
 
 			mapImage.setPixel(ctrX, ctrY, sf::Color(color, color, color, 255));
 		}

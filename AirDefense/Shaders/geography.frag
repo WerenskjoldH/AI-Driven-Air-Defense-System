@@ -1,7 +1,7 @@
 #define sand vec3(0.8764, 0.9, 0.5)
 #define grass vec3(0.3117, 0.6764, 0.1196)
 #define rock vec3(0.8294, 0.6764, 0.1196)
-#define snow vec3(0.8764, 0.8764, 0.8764)
+#define snow vec3(0.9764, 0.9764, 0.9764)
 
 uniform sampler2D mapTexture;
 uniform float waterLevel;
@@ -12,11 +12,11 @@ vec3 colorLand(float altitude)
     {
         return sand;
     }
-    else if(altitude < 0.7)
+    else if(altitude < 0.8)
     {
         return grass;
     }
-    else if(altitude < 0.8)
+    else if(altitude < 0.9)
     {
         return rock;
     }
