@@ -9,9 +9,6 @@ void Geography::regenerate(int seed = 9996)
 	mapTexture.create(worldSizeX, worldSizeY);
 
 	generateLand();
-
-	mapTexture.update(mapImage);
-	mapSprite.setTexture(mapTexture);
 }
 
 float Geography::getAltitude(float x, float y)
@@ -23,14 +20,20 @@ float Geography::getAltitude(float x, float y)
 
 bool Geography::checkIfLand(int x, int y)
 {
-	if (mapImage.getPixel(x, y).r == 255)
+	if (mapImage.getPixel(x, y).r >= waterLevel * 255)
 		return true;
 	return false;
 }
 
 void Geography::drawLand(sf::RenderWindow * window)
 {
-	window->draw(mapSprite);
+	sf::RenderStates states;
+	states.texture = &mapTexture;
+	states.shader = &geographyShader;
+
+	// This is not necessarily how I would like to do this since it does not support multiple textures
+	// But, this does allow us to easily take advantage of both SFML's native drawing abilities and drawing with shaders
+	window->draw((*quad), states);
 }
 
 void Geography::generateLand()
@@ -46,11 +49,15 @@ void Geography::generateLand()
 			float e = std::pow(v, 1.78);
 			int color;
 
-			if (e > waterLevel)
-				color = 255;
-			else
-				color = 0;
+			color = 255 * e;
+
 
 			mapImage.setPixel(ctrX, ctrY, sf::Color(color, color, color, 255));
 		}
+
+	mapTexture.update(mapImage);
+	mapSprite.setTexture(mapTexture);
+
+	// Update the geography shader
+	geographyShader.setUniform("waterLevel", waterLevel);
 }
