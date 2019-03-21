@@ -4,6 +4,8 @@
 #define WINDOW_WIDTH	800
 #define WINDOW_HEIGHT	800
 
+#define IS_MOUSE_VISIBLE false
+
 #define BACKGROUND_COLOR sf::Color::Black
 
 #define IM InputManager::getInstance()

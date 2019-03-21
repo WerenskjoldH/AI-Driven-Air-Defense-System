@@ -24,5 +24,5 @@ void main()
     else if(pixel.r < waterLevel)
         color = colorWater(pixel.r);
 
-    gl_FragColor = gl_Color * vec4(pixel.rgb, 1.0);
+    gl_FragColor = gl_Color * vec4(color.rgb, 1.0);
 }
