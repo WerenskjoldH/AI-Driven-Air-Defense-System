@@ -13,6 +13,8 @@ void Game::initializeWindowSettings(sf::RenderWindow* window)
 {
 	window->create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Air Defense - Carson Wilber and Hunter Werenskjold", sf::Style::Titlebar | sf::Style::Close);
 	
+	window->setMouseCursorVisible(IS_MOUSE_VISIBLE);
+
 	// It's best to restrict framerate incase any physics gets tied to it
 	window->setFramerateLimit(60);
 }
@@ -24,7 +26,7 @@ void Game::initializeKeyboardSettings()
 
 void Game::initializeSimulationSettings()
 {
-	world = new Geography(WINDOW_WIDTH, WINDOW_HEIGHT, 6, 1, 1, 0.4);
+	world = new Geography(WINDOW_WIDTH, WINDOW_HEIGHT, 6, 0.9, 1, 0.4);
 }
 
 void Game::begin()
@@ -113,9 +115,9 @@ void Game::draw(sf::RenderWindow* window)
 {
 	world->drawLand(window);
 
-	sf::CircleShape circle(10);
-	circle.setFillColor(sf::Color(0,0,255,255));
-	circle.setPosition(float(IM.mousePosition().x - 10), float(IM.mousePosition().y - 10));
+	sf::CircleShape circle(5);
+	circle.setFillColor(sf::Color(80,80,80,255));
+	circle.setPosition(float(IM.mousePosition().x - 5), float(IM.mousePosition().y - 5));
 
 	window->draw(circle);
 }

@@ -4,14 +4,16 @@
 #define WINDOW_WIDTH	800
 #define WINDOW_HEIGHT	800
 
+#define IS_MOUSE_VISIBLE false
+
 #define BACKGROUND_COLOR sf::Color::Black
 
 #define IM InputManager::getInstance()
-#define SET_FONT_COLOR(c) Colorizer::getInstance().setTextColor(c)
 
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/OpenGL.hpp>
 
 #include "consoleColorer.h"
 #include "inputManager.h"

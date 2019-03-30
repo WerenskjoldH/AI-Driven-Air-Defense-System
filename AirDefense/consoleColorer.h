@@ -1,6 +1,9 @@
 #ifndef CONSOLE_COLORIZER_H
 #define CONSOLE_COLORIZER_H
 
+#define SET_FONT_COLOR(c) Colorizer::getInstance().setTextColor(c)
+#define WRITE_CONSOLE_ERROR(errorLocation, errorDescription) Colorizer::getInstance().writeError(errorLocation, errorDescription)
+
 #define FONT_BLACK		0
 #define FONT_BLUE		1
 #define FONT_GREEN		2
@@ -60,10 +63,17 @@ public:
 	{
 		if (c < 0 || c > 15)
 		{
-			printf("ERROR::COLORIZER::Please keep text color in the integer set [0, 15]");
+			WRITE_CONSOLE_ERROR("COLORIZER", "Please keep text color in the integer set [0, 15]");
 		}
 
 		SetConsoleTextAttribute(consoleHandler, c);
+	}
+
+	void writeError(const char* errorLocation, const char* errorDescription)
+	{
+		SET_FONT_COLOR(FONT_RED);
+		printf("ERROR::%s::%s\n", errorLocation, errorDescription);
+		SET_FONT_COLOR();
 	}
 
 private:
