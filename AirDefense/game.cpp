@@ -26,7 +26,8 @@ void Game::initializeKeyboardSettings()
 
 void Game::initializeSimulationSettings()
 {
-	world = new Geography(WINDOW_WIDTH, WINDOW_HEIGHT, 6, 0.9, 1, 0.4);
+	//world = new Geography(WINDOW_WIDTH, WINDOW_HEIGHT, 6, 0.9, 1, 0.4);
+	world = std::unique_ptr<World>(new World(WINDOW_WIDTH, WINDOW_HEIGHT));
 }
 
 void Game::begin()
@@ -95,7 +96,7 @@ void Game::update(sf::RenderWindow* window, float dt)
 	if (IM.keyRelease(sf::Keyboard::Space))
 	{
 		srand(std::time(0));
-		world->regenerate(rand() % 10000);
+		world->regenerateGeography(rand() % 10000);
 		SET_FONT_COLOR(FONT_GREEN);
 		printf("Land has been regenerated\n");
 		SET_FONT_COLOR();
@@ -103,17 +104,18 @@ void Game::update(sf::RenderWindow* window, float dt)
 
 	if (IM.mousePress(MOUSE_LMB))
 	{
-		if (world->checkIfLand(IM.mousePosition().x, IM.mousePosition().y))
+		if (world->checkIfLandAtMouse())
 			printf("You clicked land!\n");
 		else
 			printf("You clicked water!\n");
 	}
 	
+	world->update(window, dt);
 }
 
 void Game::draw(sf::RenderWindow* window)
 {
-	world->drawLand(window);
+	world->draw(window);
 
 	sf::CircleShape circle(5);
 	circle.setFillColor(sf::Color(80,80,80,255));

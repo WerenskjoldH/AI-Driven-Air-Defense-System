@@ -30,7 +30,7 @@ public:
 		mapTexture.update(mapImage);
 		mapSprite.setTexture(mapTexture);
 
-		quad = new sf::VertexArray(sf::Quads, 4);
+		quad = std::unique_ptr<sf::VertexArray>(new sf::VertexArray(sf::Quads, 4));
 
 		(*quad)[0].position = sf::Vector2f(0.f, 0.f);
 		(*quad)[1].position = sf::Vector2f(sizeX, 0.f);
@@ -72,7 +72,7 @@ private:
 	sf::Texture mapTexture;
 	sf::Shader geographyShader;
 
-	sf::VertexArray *quad;
+	std::unique_ptr<sf::VertexArray> quad;
 
 	int worldSizeX, worldSizeY;
 	float frequency;

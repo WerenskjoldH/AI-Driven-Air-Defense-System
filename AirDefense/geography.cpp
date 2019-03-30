@@ -22,6 +22,7 @@ bool Geography::checkIfLand(int x, int y)
 {
 	if (mapImage.getPixel(x, y).r >= waterLevel * 255)
 		return true;
+	
 	return false;
 }
 
