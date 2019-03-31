@@ -34,7 +34,7 @@ void Geography::drawLand(sf::RenderWindow * window)
 
 	// This is not necessarily how I would like to do this since it does not support multiple textures
 	// But, this does allow us to easily take advantage of both SFML's native drawing abilities and drawing with shaders
-	window->draw((*quad), states);
+	window->draw(*quad, states);
 }
 
 void Geography::generateLand()

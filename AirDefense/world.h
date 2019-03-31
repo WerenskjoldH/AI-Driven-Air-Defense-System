@@ -3,30 +3,39 @@
 
 #define IM InputManager::getInstance()
 
-#include "geography.h"
 #include "inputManager.h"
+#include "objectManager.h"
+#include "geography.h"
 
 class World {
 public:
 
 	World(int worldWidth, int worldHeight)
 	{
-		geography = std::unique_ptr<Geography>(new Geography(worldWidth, worldHeight, 6, 0.9, 1, 0.4));
+		geography = new Geography(worldWidth, worldHeight, 6, 0.9, 1, 0.4);
 
 		initialize();
 	}
 
-	~World() {}
+	~World() 
+	{
+		delete geography;
+	}
 
-	void initialize();
 	void update(sf::RenderWindow* window, float dt);
 	void draw(sf::RenderWindow* window);
+
+	void addObject(WorldObject *obj);
 
 	bool checkIfLandAtMouse() { return geography->checkIfLand(IM.mousePosition().x, IM.mousePosition().y); }
 	void regenerateGeography(float seed) { geography->regenerate(seed); }
 
 private:
-	std::unique_ptr<Geography> geography;
+	Geography *geography;
+
+	ObjectManager objectManager;
+
+	void initialize();
 };
 
 #endif

@@ -20,7 +20,7 @@ private:
 	// This is the default font we will use
 	sf::Font defaultFont;
 
-	std::unique_ptr<World> world;
+	World *world;
 
 	void initialize();
 	void initializeWindowSettings(sf::RenderWindow* window);
@@ -40,7 +40,10 @@ public:
 		initialize();
 	}
 
-	~Game() {}
+	~Game() 
+	{
+		delete world;
+	}
 
 	void begin();
 };
