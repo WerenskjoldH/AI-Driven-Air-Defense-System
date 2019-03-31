@@ -24,6 +24,8 @@ void Game::initializeWindowSettings(sf::RenderWindow* window)
 void Game::initializeKeyboardSettings()
 {
 	IM.addKey(sf::Keyboard::Space);
+	IM.addKey(sf::Keyboard::R);
+	IM.addKey(sf::Keyboard::I);
 }
 
 void Game::initializeSimulationSettings()
@@ -87,13 +89,6 @@ void Game::update(sf::RenderWindow* window, float dt)
 		window->close();
 	}
 
-	if (IM.keyPress(sf::Keyboard::Space))
-	{
-		SET_FONT_COLOR(FONT_BLUE);
-		printf("Land is regenerating...\n");
-		SET_FONT_COLOR();
-	}
-
 	// Regenerate landmasses
 	if (IM.keyRelease(sf::Keyboard::Space))
 	{
@@ -102,6 +97,21 @@ void Game::update(sf::RenderWindow* window, float dt)
 		SET_FONT_COLOR(FONT_GREEN);
 		printf("Land has been regenerated\n");
 		SET_FONT_COLOR();
+	}
+
+	if (IM.keyPress(sf::Keyboard::I))
+	{
+		SET_FONT_COLOR(FONT_GREEN);
+		printf("+================================================+\n");
+		printf("\t\t World Information\n");
+		printf("+================================================+\n\n");
+		SET_FONT_COLOR();
+		printf("Number of Objects: %i\n\n", world->getNumberOfLivingObjects());
+	}
+
+	if (IM.keyRelease(sf::Keyboard::R))
+	{
+		world->resetWorld();
 	}
 
 	if (IM.mousePress(MOUSE_LMB))

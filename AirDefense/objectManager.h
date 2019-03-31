@@ -21,6 +21,9 @@ public:
 	void update(World *world, float dt);
 	void draw(sf::RenderWindow* window);
 	void addObject(WorldObject *obj);
+	void reset();
+
+	int getNumberOfObjects() { return objects.size(); }
 
 private:
 	std::vector<WorldObject*> objects;

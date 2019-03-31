@@ -6,13 +6,22 @@
 class TestObject : public WorldObject 
 {
 public:
-	TestObject(float x, float y)
+	TestObject(float x, float y) : WorldObject()
 	{
 		position.x = x - 5.f;
 		position.y = y - 5.f;
 	}
 
-	void update(World* world, float dt) {};
+	virtual ~TestObject() {};
+
+	void initialization() {};
+
+	void update(World* world, float dt) 
+	{
+		// Checks if located in water, if so marks for death
+		if (!world->checkIfLandAtLocation(position.x, position.y))
+			this->isDead = true;
+	};
 
 	void draw(sf::RenderWindow* window)
 	{

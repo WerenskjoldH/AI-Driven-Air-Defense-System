@@ -27,7 +27,14 @@ public:
 
 	void addObject(WorldObject *obj);
 
+	void resetWorld();
+
+	int getNumberOfLivingObjects() { return objectManager.getNumberOfObjects(); }
+
 	bool checkIfLandAtMouse() { return geography->checkIfLand(IM.mousePosition().x, IM.mousePosition().y); }
+
+	bool checkIfLandAtLocation(float x, float y) { return geography->checkIfLand(x, y); }
+
 	void regenerateGeography(float seed) { geography->regenerate(seed); }
 
 private:

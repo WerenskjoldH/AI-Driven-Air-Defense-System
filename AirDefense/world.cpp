@@ -22,3 +22,8 @@ void World::addObject(WorldObject *obj)
 {
 	objectManager.addObject(obj);
 }
+
+void World::resetWorld()
+{
+	objectManager.reset();
+}
