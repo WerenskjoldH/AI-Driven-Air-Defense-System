@@ -124,7 +124,7 @@ void Game::update(sf::RenderWindow* window, float dt)
 
 	if (IM.mousePress(MOUSE_RMB))
 	{
-		world->addObject(createTestObject(IM.mousePosition().x, IM.mousePosition().y));
+		world->addObject(createTestObject(IM.mousePosition().x, IM.mousePosition().y, 5.f));
 	}
 	
 	world->update(window, dt);

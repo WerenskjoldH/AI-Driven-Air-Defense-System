@@ -7,8 +7,6 @@
 #include "consoleColorer.h"
 #include "worldObject.h"
 
-class World;
-
 class ObjectManager {
 public:
 	ObjectManager()
@@ -24,6 +22,8 @@ public:
 	void reset();
 
 	int getNumberOfObjects() { return objects.size(); }
+
+	bool checkIfIdExists(int id);
 
 	std::vector<WorldObject*> getWorldObjects() { return objects; };
 

@@ -1,5 +1,5 @@
 #include "objectManager.h"
-#include "world.h"
+
 
 void ObjectManager::initialize()
 {
@@ -12,7 +12,7 @@ void ObjectManager::update(World *world, float dt)
 	std::vector<WorldObject*>::iterator it = objects.begin();
 	while (it != objects.end())
 	{
-		if ((*it)->IsDead())
+		if ((*it)->isObjectDead())
 		{
 			delete (*it);
 			it = objects.erase(it);
@@ -52,4 +52,15 @@ void ObjectManager::reset()
 		it = objects.erase(it);
 		delete obj;
 	}
+}
+
+bool ObjectManager::checkIfIdExists(int id)
+{
+	for (std::vector<WorldObject*>::iterator it = objects.begin(); it != objects.end(); it++)
+	{
+		if ((*it)->getID() == id)
+			return true;
+	}
+
+	return false;
 }
