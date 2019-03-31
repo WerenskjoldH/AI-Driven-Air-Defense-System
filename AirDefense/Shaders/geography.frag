@@ -2,6 +2,7 @@
 #define grass vec3(0.3117, 0.6764, 0.1196)
 #define rock vec3(0.8294, 0.6764, 0.1196)
 #define snow vec3(0.9764, 0.9764, 0.9764)
+#define water vec3(0.0, 0.1, 0.9);
 
 uniform sampler2D mapTexture;
 uniform float waterLevel;
@@ -28,7 +29,7 @@ vec3 colorLand(float altitude)
 
 vec3 colorWater(float altitude)
 {
-    return vec3(0.0, 0.0, 0.7);
+    return water;
 }
 
 void main()
