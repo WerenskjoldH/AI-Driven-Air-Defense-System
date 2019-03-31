@@ -49,14 +49,21 @@ void Geography::generateLand()
 			float noiseY = (float)ctrY / (float)worldSizeY;
 
 			float n1 = getPerlinNoise(noiseX * frequency / zoom + seed, noiseY * frequency / zoom + seed);
-			float n2 = getPerlinNoise(2.0 * noiseX * frequency / zoom + seed, 2.0 * noiseY * frequency / zoom + seed);
-			float n3 = getPerlinNoise(4.0 * noiseX * frequency / zoom + seed, 4.0 * noiseY * frequency / zoom + seed);
+			float n2 = getPerlinNoise(2.0f * noiseX * frequency / zoom + seed, 2.0 * noiseY * frequency / zoom + seed);
+			float n3 = getPerlinNoise(4.0f * noiseX * frequency / zoom + seed, 4.0 * noiseY * frequency / zoom + seed);
 
-			float elevation = n1 + 0.5 * n2 + 0.25 * n3; 
+			float elevation = n1 + 0.5 * n2 + 0.25f * n3; 
 
-			float v = std::min((elevation + 1.0) / 2.0, 1.0);
+			float v = 0;
+
+			if(ISLAND_COUNTRY)
+				v -= (std::sqrt(std::pow(0.5f - noiseX, 2.f) + std::pow(0.5f - noiseY, 2.f)));
+
+			v += std::min((elevation + 1.0f) / 2.0f, 1.0f);
 			float e = std::pow(v, 0.74);
 
+			if(ISLAND_COUNTRY)
+				v = std::min(v, 1.0f);
 
 			color = 255 * e;
 

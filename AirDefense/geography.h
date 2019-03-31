@@ -1,6 +1,8 @@
 #ifndef GEOGRAPHY_H
 #define GEOGRAPHY_H
 
+#define ISLAND_COUNTRY false
+
 #include <SFML/Graphics.hpp>
 
 #include "noiseGenerator.h"
