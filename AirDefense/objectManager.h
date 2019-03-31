@@ -13,7 +13,7 @@ class ObjectManager {
 public:
 	ObjectManager()
 	{
-
+		totalNumObjects = 0;
 	}
 
 	~ObjectManager() {}
@@ -25,8 +25,12 @@ public:
 
 	int getNumberOfObjects() { return objects.size(); }
 
+	std::vector<WorldObject*> getWorldObjects() { return objects; };
+
 private:
 	std::vector<WorldObject*> objects;
+
+	int totalNumObjects;
 
 	void initialize();
 };

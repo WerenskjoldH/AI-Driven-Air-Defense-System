@@ -12,7 +12,7 @@ public:
 
 	World(int worldWidth, int worldHeight)
 	{
-		geography = new Geography(worldWidth, worldHeight, 6, 0.9, 1, 0.4);
+		geography = new Geography(worldWidth, worldHeight, 6, 0.5, 1, 0.4, 1996);
 
 		initialize();
 	}
@@ -36,6 +36,8 @@ public:
 	bool checkIfLandAtLocation(float x, float y) { return geography->checkIfLand(x, y); }
 
 	void regenerateGeography(float seed) { geography->regenerate(seed); }
+
+	std::vector<WorldObject*> getWorldObjects() { return objectManager.getWorldObjects();  };
 
 private:
 	Geography *geography;

@@ -38,6 +38,7 @@ void ObjectManager::draw(sf::RenderWindow * window)
 
 void ObjectManager::addObject(WorldObject *obj)
 {
+	obj->setID(totalNumObjects++);
 	objects.push_back(obj);
 }
 

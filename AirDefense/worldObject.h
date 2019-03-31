@@ -10,18 +10,21 @@ class WorldObject
 {
 public:
 
-	WorldObject() {
-		// World objects are marked to be alive after initialization is completed
-
+	// Having to hand name each derived class is unfortunate, but quick
+	WorldObject(const char* objectType) : objectType{(char*)objectType}
+	{
 		isDead = false;
 	}
 
-	virtual ~WorldObject() {};
+	virtual ~WorldObject() { };
 
-	bool IsDead()
-	{
-		return isDead;
-	}
+	const bool IsDead() { return isDead; }
+
+	const int getID() { return uniqueID; };
+
+	void setID(int i) { uniqueID = i; }
+
+	const char* getObjectType() { return objectType; };
 
 	virtual void initialization() = 0;
 
@@ -32,6 +35,8 @@ public:
 protected:
 	sf::Vector2f position;
 	
+	int uniqueID;
+	char* objectType;
 	int isDead;
 };
 

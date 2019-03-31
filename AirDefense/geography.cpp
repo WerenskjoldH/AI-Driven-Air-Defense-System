@@ -57,7 +57,7 @@ void Geography::generateLand()
 			float v = 0;
 
 			if(ISLAND_COUNTRY)
-				v -= (std::sqrt(std::pow(0.5f - noiseX, 2.f) + std::pow(0.5f - noiseY, 2.f)));
+				v -= 1.7f * (std::sqrt(std::pow(0.5f - noiseX, 2.f) + std::pow(0.5f - noiseY, 2.f)));
 
 			v += std::min((elevation + 1.0f) / 2.0f, 1.0f);
 			float e = std::pow(v, 0.74);

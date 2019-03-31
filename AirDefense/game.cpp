@@ -30,7 +30,6 @@ void Game::initializeKeyboardSettings()
 
 void Game::initializeSimulationSettings()
 {
-	//world = new Geography(WINDOW_WIDTH, WINDOW_HEIGHT, 6, 0.9, 1, 0.4);
 	world = new World(WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
@@ -93,7 +92,7 @@ void Game::update(sf::RenderWindow* window, float dt)
 	if (IM.keyRelease(sf::Keyboard::Space))
 	{
 		srand(std::time(0));
-		world->regenerateGeography(rand() % 10000);
+		world->regenerateGeography(rand() % 1996);
 		world->resetWorld();
 		SET_FONT_COLOR(FONT_GREEN);
 		printf("Land has been regenerated\n");

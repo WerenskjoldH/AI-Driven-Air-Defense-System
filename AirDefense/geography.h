@@ -1,7 +1,7 @@
 #ifndef GEOGRAPHY_H
 #define GEOGRAPHY_H
 
-#define ISLAND_COUNTRY false
+#define ISLAND_COUNTRY true
 
 #include <SFML/Graphics.hpp>
 
