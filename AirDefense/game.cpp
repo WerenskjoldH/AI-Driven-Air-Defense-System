@@ -94,6 +94,7 @@ void Game::update(sf::RenderWindow* window, float dt)
 	{
 		srand(std::time(0));
 		world->regenerateGeography(rand() % 10000);
+		world->resetWorld();
 		SET_FONT_COLOR(FONT_GREEN);
 		printf("Land has been regenerated\n");
 		SET_FONT_COLOR();
