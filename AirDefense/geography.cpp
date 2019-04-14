@@ -1,6 +1,6 @@
 #include "Geography.h"
 
-void Geography::regenerate(int seed = 9996)
+void Geography::regenerate(int seed)
 {
 	this->seed = seed;
 

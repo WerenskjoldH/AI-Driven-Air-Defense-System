@@ -27,3 +27,10 @@ void World::resetWorld()
 {
 	objectManager.reset();
 }
+
+void World::resetWorldAndRegenerateGeography()
+{
+	srand(std::time(0));
+	regenerateGeography(rand() % 1996);
+	resetWorld();
+}

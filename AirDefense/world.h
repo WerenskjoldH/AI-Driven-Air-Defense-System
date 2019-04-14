@@ -27,15 +27,17 @@ public:
 
 	void addObject(WorldObject *obj);
 
+	void regenerateGeography(float seed) { geography->regenerate(seed); }
+
 	void resetWorld();
+
+	void resetWorldAndRegenerateGeography();
 
 	int getNumberOfLivingObjects() { return objectManager.getNumberOfObjects(); }
 
 	bool checkIfLandAtMouse() { return geography->checkIfLand(IM.mousePosition().x, IM.mousePosition().y); }
 
 	bool checkIfLandAtLocation(float x, float y) { return geography->checkIfLand(x, y); }
-
-	void regenerateGeography(float seed) { geography->regenerate(seed); }
 
 	std::vector<WorldObject*> getWorldObjects() { return objectManager.getWorldObjects();  };
 

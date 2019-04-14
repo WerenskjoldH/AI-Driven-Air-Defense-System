@@ -91,9 +91,8 @@ void Game::update(sf::RenderWindow* window, float dt)
 	// Regenerate landmasses
 	if (IM.keyRelease(sf::Keyboard::Space))
 	{
-		srand(std::time(0));
-		world->regenerateGeography(rand() % 1996);
-		world->resetWorld();
+		world->resetWorldAndRegenerateGeography();
+
 		SET_FONT_COLOR(FONT_GREEN);
 		printf("Land has been regenerated\n");
 		SET_FONT_COLOR();

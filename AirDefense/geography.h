@@ -13,10 +13,6 @@ class Geography
 public:
 	Geography(int sizeX, int sizeY, float frequency = 2 ^ 4, float zoom = 1.0, float amplitude = 1.0, float waterLevel = 0.5, int seed = 9996) : worldSizeX{ sizeX }, worldSizeY{ sizeY }, frequency{ frequency }, zoom{ zoom }, amplitude{ amplitude }, waterLevel{ waterLevel }, seed{ seed }
 	{
-		mapImage.create(sizeX, sizeY);
-
-		mapTexture.create(sizeX, sizeY);
-
 		if (!sf::Shader::isAvailable())
 		{
 			WRITE_CONSOLE_ERROR("SHADER", "System does not have support for shaders");
@@ -27,7 +23,7 @@ public:
 			WRITE_CONSOLE_ERROR("SHADER", "Unable to load geography shader code");
 		}
 
-		generateLand();
+		regenerate();
 
 		mapTexture.update(mapImage);
 		mapSprite.setTexture(mapTexture);
@@ -49,7 +45,7 @@ public:
 	{
 	}
 
-	void regenerate(int seed);
+	void regenerate(int seed = 9996);
 	
 	// (Slow)
 	// This does a full calculation at the given point
