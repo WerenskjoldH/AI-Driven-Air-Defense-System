@@ -3,6 +3,9 @@
 WorldObject::WorldObject(const char * objectType, sf::Vector2f position, float boundaryRadius) : objectType{ (char*)objectType }, position{ position }, boundaryRadius{ boundaryRadius }
 {
 	this->isDead = false;
+
+	this->position.x -= boundaryRadius;
+	this->position.y -= boundaryRadius;
 }
 
 WorldObject::~WorldObject()

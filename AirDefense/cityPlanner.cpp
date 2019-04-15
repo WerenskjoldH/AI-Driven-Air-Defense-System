@@ -25,11 +25,9 @@ void placeCities(World * world, Geography * geography, int numberToSelect, int n
 
 	for (int i = 0; i < numberToSelect; i++)
 	{
-		//srand(std::time(0));
-
 		// Sample a point ( both positive and negative ) based around the center of the map
-		float xO = 2.f * (halfGeoWidth) - halfGeoWidth;
-		float yO = 2.f * (halfGeoHeight) - halfGeoHeight;
+		float xO = halfGeoWidth;
+		float yO = halfGeoHeight;
 		float r = (2.f*(float(rand())) / float(RAND_MAX)) - 1.f;
 		xO *= r;
 		r = (2.f*(float(rand())) / float(RAND_MAX)) - 1.f;
@@ -53,14 +51,10 @@ void placeCities(World * world, Geography * geography, int numberToSelect, int n
 		r = (float(rand())) / float(RAND_MAX);
 
 		float p = POPULATION_MIN + (POPULATION_MAX - POPULATION_MIN) * r;
-		//r = (float(rand())) / float(RAND_MAX);
-		//p += p + (POPULATION_MAX - p) * r;
-		//r = (float(rand())) / float(RAND_MAX);
-		//p += p + (POPULATION_MAX - p) * r;
 
 		cities[i].pop = p;
 
-		// Weight city - Todo
+		// Weight city - Todo if time
 
 		// Check top cities and see if weight is greater than any of them, if so swap
 
