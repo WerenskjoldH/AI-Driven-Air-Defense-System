@@ -1,7 +1,16 @@
 #include "objectManager.h"
 
-
 void ObjectManager::initialize()
+{
+
+}
+
+ObjectManager::ObjectManager()
+{
+	totalNumObjects = 0;
+}
+
+ObjectManager::~ObjectManager()
 {
 
 }
@@ -54,6 +63,11 @@ void ObjectManager::reset()
 	}
 }
 
+int ObjectManager::getNumberOfObjects()
+{
+	return objects.size();
+}
+
 bool ObjectManager::checkIfIdExists(int id)
 {
 	for (std::vector<WorldObject*>::iterator it = objects.begin(); it != objects.end(); it++)
@@ -63,4 +77,9 @@ bool ObjectManager::checkIfIdExists(int id)
 	}
 
 	return false;
+}
+
+std::vector<WorldObject*> ObjectManager::getWorldObjects()
+{
+	return objects;
 }

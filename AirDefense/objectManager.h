@@ -7,25 +7,25 @@
 #include "consoleColorer.h"
 #include "worldObject.h"
 
+class WorldObject;
+class World;
+
 class ObjectManager {
 public:
-	ObjectManager()
-	{
-		totalNumObjects = 0;
-	}
+	ObjectManager();
 
-	~ObjectManager() {}
+	~ObjectManager();
 
 	void update(World *world, float dt);
 	void draw(sf::RenderWindow* window);
 	void addObject(WorldObject *obj);
 	void reset();
 
-	int getNumberOfObjects() { return objects.size(); }
+	int getNumberOfObjects();
 
 	bool checkIfIdExists(int id);
 
-	std::vector<WorldObject*> getWorldObjects() { return objects; };
+	std::vector<WorldObject*> getWorldObjects();
 
 private:
 	std::vector<WorldObject*> objects;

@@ -1,7 +1,5 @@
 #include "game.h"
 
-#include "worldObjectFactory.h"
-
 void Game::initialize()
 {
 	// Error message is built into function
@@ -120,11 +118,6 @@ void Game::update(sf::RenderWindow* window, float dt)
 		else
 			printf("You clicked water!\n");
 	}
-
-	if (IM.mousePress(MOUSE_RMB))
-	{
-		world->addObject(createTestObject(IM.mousePosition().x, IM.mousePosition().y, 5.f));
-	}
 	
 	world->update(window, dt);
 }
@@ -138,4 +131,13 @@ void Game::draw(sf::RenderWindow* window)
 	circle.setPosition(float(IM.mousePosition().x - 5), float(IM.mousePosition().y - 5));
 
 	window->draw(circle);
+}
+
+Game::Game()
+{
+	initialize();
+}
+
+Game::~Game()
+{
 }

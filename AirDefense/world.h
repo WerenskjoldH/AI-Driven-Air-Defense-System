@@ -3,43 +3,38 @@
 
 #define IM InputManager::getInstance()
 
+#include <SFML/Graphics.hpp>
+
 #include "inputManager.h"
 #include "objectManager.h"
-#include "geography.h"
+
+class Geography;
+class WorldObject;
+class ObjectManager;
 
 class World {
 public:
 
-	World(int worldWidth, int worldHeight)
-	{
-		geography = new Geography(worldWidth, worldHeight, 6, 0.5, 1, 0.4, 1996);
+	World(int worldWidth, int worldHeight);
 
-		initialize();
-	}
-
-	~World() 
-	{
-		delete geography;
-	}
+	~World();
 
 	void update(sf::RenderWindow* window, float dt);
 	void draw(sf::RenderWindow* window);
 
 	void addObject(WorldObject *obj);
 
-	void regenerateGeography(float seed) { geography->regenerate(seed); }
-
 	void resetWorld();
 
 	void resetWorldAndRegenerateGeography();
 
-	int getNumberOfLivingObjects() { return objectManager.getNumberOfObjects(); }
+	int getNumberOfLivingObjects();
 
-	bool checkIfLandAtMouse() { return geography->checkIfLand(IM.mousePosition().x, IM.mousePosition().y); }
+	bool checkIfLandAtMouse();
 
-	bool checkIfLandAtLocation(float x, float y) { return geography->checkIfLand(x, y); }
+	bool checkIfLandAtLocation(float x, float y);
 
-	std::vector<WorldObject*> getWorldObjects() { return objectManager.getWorldObjects();  };
+	std::vector<WorldObject*> getWorldObjects();
 
 private:
 	Geography *geography;
@@ -47,6 +42,8 @@ private:
 	ObjectManager objectManager;
 
 	void initialize();
+
+	void regenerateGeography(float seed);
 };
 
 #endif
