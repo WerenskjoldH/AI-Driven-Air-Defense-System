@@ -6,7 +6,6 @@
 void swapCities(city * a, city * b)
 {
 	city temp = *a;
-
 	*a = *b;
 	*b = temp;
 }
@@ -18,6 +17,7 @@ int scoreCity(city & c)
 
 void placeCities(World * world, Geography * geography, int numberToSelect, int numberToTest)
 {
+	// Call it a bad habit of writing so many c programs
 	city* cities = (city*)malloc(numberToSelect * sizeof(city));
 
 	float halfGeoWidth = geography->getWidth() / 2.f;

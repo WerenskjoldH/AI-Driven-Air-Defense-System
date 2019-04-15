@@ -43,7 +43,7 @@ const char * WorldObject::getObjectType()
 
 bool WorldObject::intersects(WorldObject * o) const
 {
-	if (std::fabs(vu::magnitude(o->getPosition() - this->position)) <= 2.f*boundaryRadius)
+	if (std::fabs(vu::magnitude(o->getPosition() - this->position)) <= (o->boundaryRadius + boundaryRadius))
 		return true;
 	return false;
 }
