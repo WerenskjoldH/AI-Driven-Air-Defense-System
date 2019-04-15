@@ -35,15 +35,9 @@ private:
 
 public:
 	// We will define the constructor and destructor locally in the header file
-	Game()
-	{
-		initialize();
-	}
+	Game();
 
-	~Game() 
-	{
-		delete world;
-	}
+	~Game();
 
 	void begin();
 };

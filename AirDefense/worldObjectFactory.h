@@ -1,16 +1,11 @@
 #ifndef WORLD_OBJECT_FACTORY_H	
 #define WORLD_OBJECT_FACTORY_H
 
+#include "cityObject.h"
 
-
-#include "worldObject.h"
-
-#include "testObject.h"
-
-// Creates a test object at the given coordinates
-static WorldObject* createTestObject(float x, float y, float radius)
+static WorldObject* createCityObject(float x, float y, int population)
 {
-	return (WorldObject*)(new TestObject(x, y, radius));
+	return (WorldObject*)(new CityObject(x, y, population));
 }
 
 

@@ -1,7 +1,5 @@
 #include "game.h"
 
-#include "worldObjectFactory.h"
-
 void Game::initialize()
 {
 	// Error message is built into function
@@ -91,9 +89,8 @@ void Game::update(sf::RenderWindow* window, float dt)
 	// Regenerate landmasses
 	if (IM.keyRelease(sf::Keyboard::Space))
 	{
-		srand(std::time(0));
-		world->regenerateGeography(rand() % 1996);
-		world->resetWorld();
+		world->resetWorldAndRegenerateGeography();
+
 		SET_FONT_COLOR(FONT_GREEN);
 		printf("Land has been regenerated\n");
 		SET_FONT_COLOR();
@@ -121,11 +118,6 @@ void Game::update(sf::RenderWindow* window, float dt)
 		else
 			printf("You clicked water!\n");
 	}
-
-	if (IM.mousePress(MOUSE_RMB))
-	{
-		world->addObject(createTestObject(IM.mousePosition().x, IM.mousePosition().y, 5.f));
-	}
 	
 	world->update(window, dt);
 }
@@ -139,4 +131,13 @@ void Game::draw(sf::RenderWindow* window)
 	circle.setPosition(float(IM.mousePosition().x - 5), float(IM.mousePosition().y - 5));
 
 	window->draw(circle);
+}
+
+Game::Game()
+{
+	initialize();
+}
+
+Game::~Game()
+{
 }

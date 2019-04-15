@@ -1,6 +1,8 @@
 #ifndef WORLD_OBJECT_H
 #define WORLD_OBJECT_H
 
+#include <SFML/Graphics.hpp>
+
 #include "consoleColorer.h"
 #include "vectorUtility.h"
 
@@ -11,34 +13,23 @@ class WorldObject
 public:
 
 	// Having to hand name each derived class is unfortunate, but quick
-	WorldObject(const char* objectType, sf::Vector2f position, float boundaryRadius) : objectType{ (char*)objectType }, position{ position }, boundaryRadius{ boundaryRadius }
-	{
-		this->isDead = false;
+	WorldObject(const char* objectType, sf::Vector2f position, float boundaryRadius = 0.f);
 
-		this->position.x -= boundaryRadius;
-		this->position.y -= boundaryRadius;
-	}
+	virtual ~WorldObject();
 
-	virtual ~WorldObject() { };
+	const bool isObjectDead();
 
-	const bool isObjectDead() { return isDead; }
+	void setObjectDead();
 
-	void setObjectDead() { isDead = true;  }
+	const int getID();
 
-	const int getID() { return uniqueID; };
+	void setID(int i);
 
-	void setID(int i) { uniqueID = i; }
+	const sf::Vector2f getPosition();
 
-	const sf::Vector2f getPosition() { return position; }
+	const char* getObjectType();
 
-	const char* getObjectType() { return objectType; };
-
-	bool intersects(WorldObject* o) const
-	{
-		if (std::fabs(vu::magnitude(o->getPosition() - this->position)) <= 2.f*boundaryRadius)
-			return true;
-		return false;
-	}
+	bool intersects(WorldObject* o) const;
 
 	virtual void initialization() = 0;
 
