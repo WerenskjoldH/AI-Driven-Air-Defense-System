@@ -5,8 +5,8 @@
 #define PREFERRED_CITY_DISTANCE 100.f
 #define DISTANCE_STEP_SIZE 10.f
 
-#define NUMBER_TO_SELECT_DEFAULT 6
-#define NUMBER_TO_TEST_DEFAULT 20
+#define NUMBER_TO_SELECT_DEFAULT 5
+#define NUMBER_TO_TEST_DEFAULT 15
 
 #define DISTANCE(x, y, x0, y0) sqrt(powf(x0 - x, 2) + powf(y0 - y, 2))
 

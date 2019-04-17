@@ -84,6 +84,7 @@ void Game::update(sf::RenderWindow* window, float dt)
 		printf("\t\t  Closing Game\n");
 		printf("+================================================+\n\n");
 		window->close();
+		return;
 	}
 
 	// Regenerate landmasses
