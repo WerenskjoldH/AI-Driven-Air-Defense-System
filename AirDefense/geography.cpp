@@ -54,7 +54,10 @@ float Geography::getAltitude(float x, float y)
 
 bool Geography::checkIfLand(int x, int y)
 {
-	if (mapImage.getPixel(x, y).r >= waterLevel * 255)
+	if (x >= worldSizeX || y >=  worldSizeY || x <= 0 || y <= 0)
+		return false;
+
+	if (mapImage.getPixel(x, y).r >= waterLevel * 255.f)
 		return true;
 	
 	return false;
