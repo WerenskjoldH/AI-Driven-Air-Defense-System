@@ -1,8 +1,6 @@
 #ifndef NOISE_GENERATOR_H
 #define NOISE_GENERATOR_H
 
-#define GET_ARRAY_POSITION(x, y, w) (y * w) + x
-
 #define PI 3.141592653589
 
 inline static float cosineInterpolation(float a, float b, float x)

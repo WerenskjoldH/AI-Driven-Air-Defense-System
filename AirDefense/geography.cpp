@@ -126,8 +126,8 @@ void Geography::generateLand()
 			v += std::min((elevation + 1.0f) / 2.0f, 1.0f);
 			float e = std::pow(v, 0.74);
 
-			if(ISLAND_COUNTRY)
-				v = std::min(v, 1.0f);
+			e = std::min(v, 1.0f);
+			e = std::max(v, 0.f);
 
 			color = 255 * e;
 
