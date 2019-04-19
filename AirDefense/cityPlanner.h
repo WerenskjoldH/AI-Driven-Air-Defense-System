@@ -13,23 +13,6 @@
 class World;
 class Geography;
 
-// This way we don't have to generate 2*n city objects and waste space
-struct City {
-	float x;
-	float y;
-	int pop;
-};
-
-struct Placement {
-	float overallWeight = 0.f;
-	City* cities;
-
-	~Placement()
-	{
-		delete[] cities;
-	}
-};
-
 void placeCities(World *world, Geography *geography, int numberOfCitiesToTest = NUMBER_OF_CITIES_DEFAULT, int numberOfTrials = NUMBER_OF_PLACEMENT_TEST_DEFAULT);
 
 #endif

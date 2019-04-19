@@ -8,6 +8,23 @@
 #define OBSERVED_CITY p->cities[observedCity]
 #define PLACEMENT(i) placements.at(i)
 
+// This way we don't have to generate 2*n city objects and waste space
+struct City {
+	float x;
+	float y;
+	int pop;
+};
+
+struct Placement {
+	float overallWeight = 0.f;
+	City* cities;
+
+	~Placement()
+	{
+		delete[] cities;
+	}
+};
+
 std::vector<Placement*> placements;
 
 /// Scoring Parameters
