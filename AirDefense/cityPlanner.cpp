@@ -66,32 +66,28 @@ float scoreCities(World *world, Geography *geography, int numberOfCitiesToTest, 
 
 	for (int i = 0; i < numberOfCitiesToTest; i++)
 	{
-		// Sample a point ( both positive and negative ) based around the center of the map
+		// Sample a point ( either positive and negative ) based around the center of the map
 		float xO = halfGeoWidth;
 		float yO = halfGeoHeight;
+
 		float r = (2.f*(float(rand())) / float(RAND_MAX)) - 1.f;
 		xO *= r;
+
 		r = (2.f*(float(rand())) / float(RAND_MAX)) - 1.f;
 		yO *= r;
 
 		p->cities[i].x = halfGeoWidth + xO;
 		p->cities[i].y = halfGeoHeight + yO;
 
-		// Check if valid position, if not decrement i and continue
-
+		// Check if valid position
 		if (!geography->checkIfLand(p->cities[i].x, p->cities[i].y))
 		{
 			i--;
 			continue;
 		}
 
-		// Population - We use multiple octaves to try to weight population to the upper boundary
-
 		r = (float(rand())) / float(RAND_MAX);
-
-		float population = POPULATION_MIN + (POPULATION_MAX - POPULATION_MIN) * r;
-
-		p->cities[i].pop = population;
+		p->cities[i].pop = POPULATION_MIN + (POPULATION_MAX - POPULATION_MIN) * r;
 
 		totalWeight += scoreCity(world, p, numberOfCitiesToTest, i);
 	}
