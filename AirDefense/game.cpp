@@ -1,6 +1,8 @@
 #include "game.h"
 #include "cityObject.h"
 
+#include <stdio.h>
+
 void Game::initialize()
 {
 	// Error message is built into function
@@ -159,8 +161,14 @@ void Game::draw(sf::RenderWindow* window)
 	// Draw mouse position
 	sf::Text mousePositionText;
 	mousePositionText.setFont(defaultFont);
-	mousePositionText.setString("Mouse Position <x, y>");
+	
+	char buffer[100];
+	sprintf_s(buffer, "Mouse Position: <%i, %i>", int(IM.mousePosition().x), int(IM.mousePosition().y));
 
+	mousePositionText.setString(buffer);
+	mousePositionText.setCharacterSize(18);
+	mousePositionText.setPosition(0,0);
+	window->draw(mousePositionText);
 }
 
 Game::Game()
