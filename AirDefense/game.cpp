@@ -128,7 +128,7 @@ void Game::update(sf::RenderWindow* window, float dt)
 
 			printf("City %i: \n", i+1);
 			printf("-------------------------------------------------\n");
-			printf("Position: <%f, %f>\n", cityTemp->getPosition().x, cityTemp->getPosition().y);
+			printf("Position: <%i, %i>\n", (int)cityTemp->getPosition().x, (int)cityTemp->getPosition().y);
 			printf("Population: %i\n", cityTemp->getPopulation());
 			printf("-------------------------------------------------\n");
 		}
