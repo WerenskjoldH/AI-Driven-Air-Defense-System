@@ -11,18 +11,25 @@ std::vector<Placement*> placements;
 
 /// Scoring Parameters
 // 1. Distanced from other cities
-// 2. Connected by land 
-// 3. Near water
+// 2. Not located at too high of an altitude
+// 3. Connected by land 
+// 4. Near water
 float scoreCity(World* world, Placement *p, int numberOfCities, int observedCity)
 {
 	// Total score should equal out to 3.f
 	float score = 0;
 
+	float proportionalScore = (1.f / float(numberOfCities));
+
+	// Check altitude of city
+	if (world->getAltitudeAtLocation(OBSERVED_CITY.x, OBSERVED_CITY.y) < 0.8)
+		score += 3.f * proportionalScore;
+
 	// Score distance from others and connection - This could be cleaned up
 	for (int i = 0; i < numberOfCities; i++)
 	{
 		float dist = DISTANCE(OBSERVED_CITY.x, OBSERVED_CITY.y, p->cities[i].x, p->cities[i].y);
-		score += (dist >= PREFERRED_CITY_DISTANCE) ? (1.f / float(numberOfCities)) : (-10.f * (1.f / float(numberOfCities)));
+		score += (dist >= PREFERRED_CITY_DISTANCE) ? proportionalScore : (-10.f * proportionalScore);
 
 		int step = 0;
 		sf::Vector2f origin(OBSERVED_CITY.x, OBSERVED_CITY.y);
@@ -42,7 +49,7 @@ float scoreCity(World* world, Placement *p, int numberOfCities, int observedCity
 
 		// Cities are connected by land
 		if (distanceCovered >= dist)
-			score += (1.f / float(numberOfCities));
+			score += proportionalScore;
 	}
 
 	// Score near water only check above, below, left, and right to speed things up

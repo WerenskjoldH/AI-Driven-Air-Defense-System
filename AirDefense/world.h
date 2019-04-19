@@ -34,6 +34,8 @@ public:
 
 	bool checkIfLandAtLocation(float x, float y);
 
+	float getAltitudeAtLocation(float x, float y);
+
 	std::vector<WorldObject*> getWorldObjects();
 
 private:

@@ -47,9 +47,10 @@ void Geography::regenerate(int seed)
 
 float Geography::getAltitude(float x, float y)
 {
-	float noiseX = (float)x / (float)worldSizeX;
-	float noiseY = (float)y / (float)worldSizeY;
-	return amplitude * getPerlinNoise(noiseX * frequency / zoom + seed, noiseY * frequency / zoom + seed) + 1.0 / 2.0f;
+	if (x >= worldSizeX || y >= worldSizeY || x <= 0 || y <= 0)
+		return 0.f;
+
+	return mapImage.getPixel(x, y).r/255.f;
 }
 
 bool Geography::checkIfLand(int x, int y)

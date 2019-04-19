@@ -62,6 +62,11 @@ bool World::checkIfLandAtLocation(float x, float y)
 	return geography->checkIfLand(x, y);
 }
 
+float World::getAltitudeAtLocation(float x, float y)
+{
+	return geography->getAltitude(x, y);
+}
+
 std::vector<WorldObject*> World::getWorldObjects()
 {
 	return objectManager.getWorldObjects();
