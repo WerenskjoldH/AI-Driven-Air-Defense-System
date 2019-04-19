@@ -24,8 +24,6 @@ public:
 
 	void addObject(WorldObject *obj);
 
-	void resetWorld();
-
 	void resetWorldAndRegenerateGeography();
 
 	int getNumberOfLivingObjects();
@@ -46,6 +44,8 @@ private:
 	void initialize();
 
 	void regenerateGeography(float seed);
+
+	void resetWorld();
 };
 
 #endif

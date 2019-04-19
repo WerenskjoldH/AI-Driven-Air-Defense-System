@@ -88,8 +88,12 @@ void Game::update(sf::RenderWindow* window, float dt)
 	}
 
 	// Regenerate landmasses
-	if (IM.keyRelease(sf::Keyboard::Space))
+	if (IM.keyRelease(sf::Keyboard::R))
 	{
+		SET_FONT_COLOR(FONT_YELLOW);
+		printf("Land is currently regenerating\n");
+		SET_FONT_COLOR();
+
 		world->resetWorldAndRegenerateGeography();
 
 		SET_FONT_COLOR(FONT_GREEN);
@@ -105,11 +109,6 @@ void Game::update(sf::RenderWindow* window, float dt)
 		printf("+================================================+\n\n");
 		SET_FONT_COLOR();
 		printf("Number of Objects: %i\n\n", world->getNumberOfLivingObjects());
-	}
-
-	if (IM.keyRelease(sf::Keyboard::R))
-	{
-		world->resetWorld();
 	}
 
 	if (IM.mousePress(MOUSE_LMB))
