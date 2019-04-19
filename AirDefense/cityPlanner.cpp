@@ -6,6 +6,7 @@
 #include <vector>
 
 #define OBSERVED_CITY p->cities[observedCity]
+#define PLACEMENT(i) placements.at(i)
 
 std::vector<Placement*> placements;
 
@@ -107,15 +108,15 @@ City* performTrials(World *world, Geography *geography, int numberOfCitiesToTest
 	// Perform each placement and calculate total score
 	for(int i = 0; i < numberOfTrials; i++)
 	{
-		placements.at(i)->cities = (City*)malloc(numberOfCitiesToTest * sizeof(City));
+		PLACEMENT(i)->cities = (City*)malloc(numberOfCitiesToTest * sizeof(City));
 
-		placements.at(i)->overallWeight = scoreCities(world, geography, numberOfCitiesToTest, placements.at(i));
+		PLACEMENT(i)->overallWeight = scoreCities(world, geography, numberOfCitiesToTest, PLACEMENT(i));
 	
-		if (numberOfTrials > 0 && placements.at(i)->overallWeight > placements.at(0)->overallWeight)
-			std::swap(placements.at(i), placements.at(0));
+		if (numberOfTrials > 0 && PLACEMENT(i)->overallWeight > PLACEMENT(0)->overallWeight)
+			std::swap(PLACEMENT(i), PLACEMENT(0));
 	}
 
-	return placements.at(0)->cities;
+	return PLACEMENT(0)->cities;
 }
 
 void placeCities(World *world, Geography *geography, int numberOfCitiesToTest, int numberOfTrials)
