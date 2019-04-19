@@ -2,11 +2,11 @@
 #define CITY_PLANNER_H
 
 // In pixels
-#define PREFERRED_CITY_DISTANCE 100.f
+#define PREFERRED_CITY_DISTANCE 30.f
 #define DISTANCE_STEP_SIZE 10.f
 
-#define NUMBER_TO_SELECT_DEFAULT 5
-#define NUMBER_TO_TEST_DEFAULT 15
+#define NUMBER_OF_PLACEMENT_TEST_DEFAULT 20
+#define NUMBER_OF_CITIES_DEFAULT 5
 
 #define DISTANCE(x, y, x0, y0) sqrt(powf(x0 - x, 2) + powf(y0 - y, 2))
 
@@ -14,18 +14,22 @@ class World;
 class Geography;
 
 // This way we don't have to generate 2*n city objects and waste space
-struct city {
+struct City {
 	float x;
 	float y;
 	int pop;
-	float weight = 0;
-	float radius;
 };
 
-void swapCities(city* a, city* b);
+struct Placement {
+	float overallWeight = 0.f;
+	City* cities;
 
-float scoreCity(city* cities, World* world, int numberOfCities, int observedCity);
+	~Placement()
+	{
+		delete[] cities;
+	}
+};
 
-void placeCities(World *world, Geography *geography, int numberToSelect = NUMBER_TO_SELECT_DEFAULT, int numberToTest = NUMBER_TO_TEST_DEFAULT);
+void placeCities(World *world, Geography *geography, int numberOfCitiesToTest = NUMBER_OF_CITIES_DEFAULT, int numberOfTrials = NUMBER_OF_PLACEMENT_TEST_DEFAULT);
 
 #endif
