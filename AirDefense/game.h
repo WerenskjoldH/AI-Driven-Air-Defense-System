@@ -27,6 +27,8 @@ private:
 	void initializeKeyboardSettings();
 	void initializeSimulationSettings();
 
+	void reset();
+
 	// All game logic
 	void update(sf::RenderWindow* window, float dt);
 

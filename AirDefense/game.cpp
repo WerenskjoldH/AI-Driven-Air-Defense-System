@@ -1,4 +1,5 @@
 #include "game.h"
+#include "cityObject.h"
 
 void Game::initialize()
 {
@@ -29,6 +30,11 @@ void Game::initializeKeyboardSettings()
 void Game::initializeSimulationSettings()
 {
 	world = new World(WINDOW_WIDTH, WINDOW_HEIGHT);
+}
+
+void Game::reset()
+{
+	world->resetWorldAndRegenerateGeography();
 }
 
 void Game::begin()
@@ -91,13 +97,13 @@ void Game::update(sf::RenderWindow* window, float dt)
 	if (IM.keyRelease(sf::Keyboard::R))
 	{
 		SET_FONT_COLOR(FONT_YELLOW);
-		printf("Land is currently regenerating\n");
+		printf("World is currently regenerating...\n");
 		SET_FONT_COLOR();
 
-		world->resetWorldAndRegenerateGeography();
+		reset();
 
 		SET_FONT_COLOR(FONT_GREEN);
-		printf("Land has been regenerated\n");
+		printf("World has been generated\n");
 		SET_FONT_COLOR();
 	}
 
@@ -109,6 +115,22 @@ void Game::update(sf::RenderWindow* window, float dt)
 		printf("+================================================+\n\n");
 		SET_FONT_COLOR();
 		printf("Number of Objects: %i\n\n", world->getNumberOfLivingObjects());
+
+		
+		for (int i = 0; i < world->getNumberOfLivingObjects(); i++)
+		{
+			if (world->getWorldObjects().at(i)->getObjectType() != "CityObject")
+				continue;
+			
+			CityObject* cityTemp = (CityObject*)world->getWorldObjects().at(i);
+
+			printf("City %i: \n", i+1);
+			printf("-------------------------------------------------\n");
+			printf("Position: <%f, %f>\n", cityTemp->getPosition().x, cityTemp->getPosition().y);
+			printf("Population: %i\n", cityTemp->getPopulation());
+			printf("-------------------------------------------------\n");
+		}
+
 	}
 
 	if (IM.mousePress(MOUSE_LMB))
@@ -126,11 +148,19 @@ void Game::draw(sf::RenderWindow* window)
 {
 	world->draw(window);
 
+	// TODO: Migrate this code so that we only draw and don't reinstantiate each draw. This is ~super~ inefficient!
+
+	// Draw the mouse
 	sf::CircleShape circle(5);
 	circle.setFillColor(sf::Color(80,80,80,255));
 	circle.setPosition(float(IM.mousePosition().x - 5), float(IM.mousePosition().y - 5));
-
 	window->draw(circle);
+
+	// Draw mouse position
+	sf::Text mousePositionText;
+	mousePositionText.setFont(defaultFont);
+	mousePositionText.setString("Mouse Position <x, y>");
+
 }
 
 Game::Game()

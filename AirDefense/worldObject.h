@@ -31,8 +31,6 @@ public:
 
 	bool intersects(WorldObject* o) const;
 
-	virtual void initialization() = 0;
-
 	virtual void update(World* world, float dt) = 0;
 
 	virtual void draw(sf::RenderWindow* window) = 0;

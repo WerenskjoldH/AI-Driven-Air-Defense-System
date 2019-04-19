@@ -9,14 +9,14 @@ CityObject::CityObject(float x, float y, int population) : WorldObject("CityObje
 	// Need to rerun this code since WorldObject takes 0 for radius
 	this->position.x -= boundaryRadius;
 	this->position.y -= boundaryRadius;
+
+	circle.setRadius(boundaryRadius);
+	circle.setFillColor(sf::Color(0, 0, 0, 255));
+	circle.setPosition(position);
 }
 
 CityObject::~CityObject()
 {}
-
-void CityObject::initialization()
-{
-}
 
 void CityObject::update(World * world, float dt)
 {
@@ -24,9 +24,5 @@ void CityObject::update(World * world, float dt)
 
 void CityObject::draw(sf::RenderWindow * window)
 {
-	sf::CircleShape circle(boundaryRadius);
-	circle.setFillColor(sf::Color(0, 0, 0, 255));
-	circle.setPosition(position);
-
 	window->draw(circle);
 }

@@ -18,7 +18,10 @@ public:
 
 	virtual ~CityObject();
 
-	void initialization();
+	int getPopulation() const
+	{
+		return population;
+	}
 
 	void update(World* world, float dt);
 
@@ -26,6 +29,8 @@ public:
 
 private:
 	int population;
+
+	sf::CircleShape circle;
 
 };
 
