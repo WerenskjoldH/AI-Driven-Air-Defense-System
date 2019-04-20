@@ -33,7 +33,7 @@ std::vector<Placement*> placements;
 // 4. Near water
 float scoreCity(World* world, Placement *p, int numberOfCities, int observedCity)
 {
-	// Total score should equal out to 3.f
+	// Total score should equal out to 4.f when unweighted
 	float score = 0;
 
 	float proportionalScore = (1.f / float(numberOfCities));
