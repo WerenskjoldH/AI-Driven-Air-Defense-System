@@ -12,7 +12,6 @@
 struct City {
 	float x;
 	float y;
-	int pop;
 };
 
 struct Placement {
@@ -111,9 +110,6 @@ float scoreCities(World *world, Geography *geography, int numberOfCitiesToTest, 
 			continue;
 		}
 
-		r = (float(rand())) / float(RAND_MAX);
-		p->cities[i].pop = POPULATION_MIN + (POPULATION_MAX - POPULATION_MIN) * r;
-
 		totalWeight += scoreCity(world, p, numberOfCitiesToTest, i);
 	}
 
@@ -148,7 +144,8 @@ void placeCities(World *world, Geography *geography, int numberOfCitiesToTest, i
 
 	for (int i = 0; i < numberOfCitiesToTest; i++)
 	{
-		world->addObject(createCityObject(finalCities[i].x, finalCities[i].y, finalCities[i].pop));
+		float r = (float(rand())) / float(RAND_MAX);
+		world->addObject(createCityObject(finalCities[i].x, finalCities[i].y, r = POPULATION_MIN + (POPULATION_MAX - POPULATION_MIN) * r));
 	}
 
 	// Free pointers then empty the vector

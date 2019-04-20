@@ -18,6 +18,11 @@ CityObject::CityObject(float x, float y, int population) : WorldObject("CityObje
 CityObject::~CityObject()
 {}
 
+int CityObject::getPopulation() const
+{
+	return population;
+}
+
 void CityObject::update(World * world, float dt)
 {
 }

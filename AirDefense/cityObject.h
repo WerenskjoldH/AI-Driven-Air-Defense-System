@@ -18,10 +18,7 @@ public:
 
 	virtual ~CityObject();
 
-	int getPopulation() const
-	{
-		return population;
-	}
+	int getPopulation() const;
 
 	void update(World* world, float dt);
 
