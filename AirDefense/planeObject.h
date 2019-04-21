@@ -1,6 +1,10 @@
 #ifndef PLANE_OBJECT_H
 #define PLANE_OBJECT_H
 
+#define DEFAULT_PLANE_SPEED 50.f
+
+#define PLANE_SIZE 4.f
+
 #include <SFML/Graphics.hpp>
 
 #include "worldObject.h"
@@ -19,9 +23,13 @@ public:
 
 private:
 	// Add all properties here
+	sf::Vector2f direction;
 
-	sf::Vector2f velocity;
+	float speed;
 
+	sf::CircleShape circle;
+
+	CityObject* destination;
 };
 
 #endif

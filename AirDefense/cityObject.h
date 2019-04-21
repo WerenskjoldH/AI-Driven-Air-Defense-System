@@ -7,6 +7,8 @@
 #define RADIUS_MIN 4.f
 #define RADIUS_INCREASE_MAX 8.f
 
+#define UPPER_SPAWN_TIME_LIMIT 6
+
 #include <SFML/Graphics.hpp>
 #include "worldObject.h"
 
@@ -31,6 +33,9 @@ public:
 private:
 	int destroyed;
 	int population;
+
+	float timeAccumulator;
+	float spawnTime;
 
 	sf::CircleShape circle;
 

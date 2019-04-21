@@ -24,10 +24,13 @@ void ProjectileObject::update(World * world, float dt)
 
 	if (intersects((WorldObject*)targetCity))
 	{
-		spawner->incrementDestroyedCities();
+		if (!targetCity->isDestroyed())
+		{
+			spawner->incrementDestroyedCities();
 
-		// Destroy the city, if it is not destroyed yet
-		targetCity->destroyCity();
+			// Destroy the city, if it is not destroyed yet
+			targetCity->destroyCity();
+		}
 
 		// Destroy this missile
 		this->setObjectDead();

@@ -58,10 +58,11 @@ void ProjectileSpawnerObject::addProjectile(World* world)
 	float x, y;
 
 	// To avoid human-detectable patterns, we just make three random values
-	// We could make this more efficient
+	// This is faster than recalculating a new random value for each variable
 	double r = (float(rand())) / float(RAND_MAX);
-	double r2 = (float(rand())) / float(RAND_MAX);
-	double r3 = (float(rand())) / float(RAND_MAX);
+	double r2 = (r * 29) - int(r * 29);
+	double r3 = (r2 * 97) - int(r2 * 97);
+
 
 	// Select a position
 	// If we get 1 then place on the horizontal, else vertical

@@ -1,4 +1,6 @@
 #include "cityObject.h"
+#include "planeObject.h"
+#include "world.h"
 
 CityObject::CityObject(float x, float y, int population) : WorldObject("CityObject", sf::Vector2f(x, y))
 {
@@ -7,6 +9,9 @@ CityObject::CityObject(float x, float y, int population) : WorldObject("CityObje
 	this->population = population;
 
 	destroyed = false;
+
+	timeAccumulator = 0.f;
+	spawnTime = rand() % UPPER_SPAWN_TIME_LIMIT;
 
 	circle.setRadius(boundaryRadius);
 	circle.setOrigin(sf::Vector2f(boundaryRadius, boundaryRadius));
@@ -24,6 +29,35 @@ int CityObject::getPopulation() const
 
 void CityObject::update(World * world, float dt)
 {
+	if (isDestroyed())
+		return;
+
+	if (timeAccumulator >= spawnTime)
+	{
+		// Select closest city
+		int cityNum = 0;
+		int a = INT_MAX;
+		for (int i = 0; i < world->getNumberOfLivingObjects(); i++)
+		{
+			if (!(world->getWorldObjects().at(i)->getObjectType() == "CityObject") || ((CityObject*)world->getWorldObjects().at(i))->isDestroyed() || this->getID() == world->getWorldObjects().at(i)->getID())
+				continue;
+
+			float distTemp = vu::magnitude(world->getWorldObjects().at(i)->getPosition() - this->getPosition());
+
+			if (distTemp < a)
+			{
+				a = distTemp;
+				cityNum = i;
+			}
+		}
+
+		world->addObject((WorldObject*)new PlaneObject(getPosition().x, getPosition().y, (CityObject*)world->getWorldObjects().at(cityNum)));
+
+		timeAccumulator = 0;
+		spawnTime = rand() % UPPER_SPAWN_TIME_LIMIT;
+	}
+
+	timeAccumulator += dt;
 }
 
 void CityObject::draw(sf::RenderWindow * window)
