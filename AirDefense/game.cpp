@@ -1,5 +1,6 @@
 #include "game.h"
 #include "cityObject.h"
+#include "projectileObject.h"
 
 #include <stdio.h>
 
@@ -137,10 +138,8 @@ void Game::update(sf::RenderWindow* window, float dt)
 
 	if (IM.mousePress(MOUSE_LMB))
 	{
-		if (world->checkIfLandAtMouse())
-			printf("You clicked land!\n");
-		else
-			printf("You clicked water!\n");
+		// This is a hacked together, don't keep in long
+		world->addObject((WorldObject*)(new ProjectileObject(IM.mousePosition().x, IM.mousePosition().y, (CityObject*)world->getWorldObjects().at(0))));
 	}
 	
 	world->update(window, dt);

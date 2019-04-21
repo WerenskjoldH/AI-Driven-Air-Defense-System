@@ -24,7 +24,10 @@ public:
 
 	void draw(sf::RenderWindow* window);
 
+	bool isDestroyed() const;
+
 private:
+	int destroyed;
 	int population;
 
 	sf::CircleShape circle;
