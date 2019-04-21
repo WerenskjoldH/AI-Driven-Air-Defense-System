@@ -24,6 +24,8 @@ void ProjectileObject::update(World * world, float dt)
 
 	if (intersects((WorldObject*)targetCity))
 	{
+		spawner->incrementDestroyedCities();
+
 		// Destroy the city, if it is not destroyed yet
 		targetCity->destroyCity();
 
@@ -36,4 +38,9 @@ void ProjectileObject::draw(sf::RenderWindow * window)
 {
 	circle.setPosition(position);
 	window->draw(circle);
+}
+
+void ProjectileObject::setSpawner(ProjectileSpawnerObject* s)
+{
+	spawner = s;
 }

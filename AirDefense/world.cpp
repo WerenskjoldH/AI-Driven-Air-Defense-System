@@ -67,6 +67,16 @@ float World::getAltitudeAtLocation(float x, float y)
 	return geography->getAltitude(x, y);
 }
 
+int World::getWorldHeight()
+{
+	return geography->getHeight();
+}
+
+int World::getWorldWidth()
+{
+	return geography->getWidth();
+}
+
 std::vector<WorldObject*> World::getWorldObjects()
 {
 	return objectManager.getWorldObjects();

@@ -30,10 +30,11 @@ void ObjectManager::update(World *world, float dt)
 			++it;
 	}
 
-	/// Update 'alive' objects
-	for (it = objects.begin(); it != objects.end(); it++)
+	/// Update 'alive' objects - we must loop this to avoid the issues of adding new objects from inside object
+	int i = objects.size();
+	for (int j = 0; j < i; j++)
 	{
-		(*it)->update(world, dt);
+		objects.at(j)->update(world, dt);
 	}
 }
 

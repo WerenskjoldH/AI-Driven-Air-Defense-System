@@ -34,6 +34,9 @@ public:
 
 	float getAltitudeAtLocation(float x, float y);
 
+	int getWorldHeight();
+	int getWorldWidth();
+
 	std::vector<WorldObject*> getWorldObjects();
 
 private:

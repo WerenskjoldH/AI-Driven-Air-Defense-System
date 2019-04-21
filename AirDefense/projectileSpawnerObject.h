@@ -1,13 +1,15 @@
 #ifndef PROJECTILE_SPAWNER_OBJECT_H
 #define PROJECTILE_SPAWNER_OBJECT_H
 
+#define UPPER_SPAWN_TIME_LIMIT 6
+
 #include <SFML/Graphics.hpp>
 #include "worldObject.h"
 
 class ProjectileSpawnerObject : public WorldObject
 {
 public:
-	//CityObject::CityObject(float x, float y, int population) : WorldObject("CityObject", sf::Vector2f(x, y))
+
 	ProjectileSpawnerObject();
 
 	virtual ~ProjectileSpawnerObject();
@@ -16,9 +18,19 @@ public:
 
 	void draw(sf::RenderWindow* window);
 
+	void incrementDestroyedCities();
+
 private:
+	int numberOfCities;
+	int numberOfCitiesDestroyed;
+
+	float timeAccumulator;
+	float spawnTime;
+
+	bool ceaseFire;
+
 	// Spawn missile
-	// addProjectile(float x, float y, projectile information...);
+	void addProjectile(World* world);
 };
 
 #endif

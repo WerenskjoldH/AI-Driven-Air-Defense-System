@@ -1,8 +1,10 @@
 #include "game.h"
 #include "cityObject.h"
 #include "projectileObject.h"
+#include "projectileSpawnerObject.h"
 
 #include <stdio.h>
+#include <math.h>
 
 void Game::initialize()
 {
@@ -28,6 +30,7 @@ void Game::initializeKeyboardSettings()
 	IM.addKey(sf::Keyboard::Space);
 	IM.addKey(sf::Keyboard::R);
 	IM.addKey(sf::Keyboard::I);
+	IM.addKey(sf::Keyboard::B);
 }
 
 void Game::initializeSimulationSettings()
@@ -110,6 +113,7 @@ void Game::update(sf::RenderWindow* window, float dt)
 		SET_FONT_COLOR();
 	}
 
+	// Print simulation info
 	if (IM.keyPress(sf::Keyboard::I))
 	{
 		SET_FONT_COLOR(FONT_GREEN);
@@ -135,12 +139,14 @@ void Game::update(sf::RenderWindow* window, float dt)
 		}
 
 	}
+	
+	if (IM.keyRelease(sf::Keyboard::B))
+	{
+		world->addObject((WorldObject*)new ProjectileSpawnerObject());
+	}
 
 	if (IM.mousePress(MOUSE_LMB))
-	{
-		// This is a hacked together, don't keep in long
-		world->addObject((WorldObject*)(new ProjectileObject(IM.mousePosition().x, IM.mousePosition().y, (CityObject*)world->getWorldObjects().at(0))));
-	}
+	{}
 	
 	world->update(window, dt);
 }

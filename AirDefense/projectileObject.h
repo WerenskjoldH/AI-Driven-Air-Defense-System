@@ -2,13 +2,14 @@
 #define PROJECTILE_OBJECT_H
 
 #define DEFAULT_PROJECTILE_SIZE 3.f
-#define DEFAULT_PROJECTILE_SPEED 10.f
+#define DEFAULT_PROJECTILE_SPEED 100.f
 
 #include <SFML/Graphics.hpp>
 
 #include "worldObject.h"
 #include "cityObject.h"
 #include "vectorUtility.h"
+#include "projectileSpawnerObject.h"
 
 class ProjectileObject : public WorldObject
 {
@@ -21,6 +22,8 @@ public:
 
 	void draw(sf::RenderWindow* window);
 
+	void setSpawner(ProjectileSpawnerObject* s);
+
 private:
 	// Add all properties here
 	sf::Vector2f direction;
@@ -30,6 +33,7 @@ private:
 
 	CityObject* targetCity;
 
+	ProjectileSpawnerObject* spawner;
 };
 
 #endif

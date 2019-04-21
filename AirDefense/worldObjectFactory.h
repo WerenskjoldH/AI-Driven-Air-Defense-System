@@ -4,7 +4,7 @@
 #include "cityObject.h"
 
 // I'm still asking myself if a factory is really all that necessary for this project... 
-// Keeping it in seems pointless
+// I've gutted any usage of these functions for now
 
 static WorldObject* createCityObject(float x, float y, int population)
 {
