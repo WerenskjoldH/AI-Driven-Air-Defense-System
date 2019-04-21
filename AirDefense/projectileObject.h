@@ -2,7 +2,7 @@
 #define PROJECTILE_OBJECT_H
 
 #define DEFAULT_PROJECTILE_SIZE 3.f
-#define DEFAULT_PROJECTILE_SPEED 8.f
+#define DEFAULT_PROJECTILE_SPEED 10.f
 
 #include <SFML/Graphics.hpp>
 

@@ -9,6 +9,8 @@ ProjectileObject::ProjectileObject(float x, float y, CityObject * target) : Worl
 	speed = DEFAULT_PROJECTILE_SPEED;
 
 	direction = vu::unit(target->getPosition() - sf::Vector2f(x,y));
+
+	targetCity = target;
 }
 
 ProjectileObject::~ProjectileObject()
@@ -19,6 +21,15 @@ ProjectileObject::~ProjectileObject()
 void ProjectileObject::update(World * world, float dt)
 {
 	position += speed * direction * dt;
+
+	if (intersects((WorldObject*)targetCity))
+	{
+		// Destroy the city, if it is not destroyed yet
+		targetCity->destroyCity();
+
+		// Destroy this missile
+		this->setObjectDead();
+	}
 }
 
 void ProjectileObject::draw(sf::RenderWindow * window)

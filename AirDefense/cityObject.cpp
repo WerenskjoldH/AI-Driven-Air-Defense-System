@@ -6,6 +6,8 @@ CityObject::CityObject(float x, float y, int population) : WorldObject("CityObje
 
 	this->population = population;
 
+	destroyed = false;
+
 	circle.setRadius(boundaryRadius);
 	circle.setOrigin(sf::Vector2f(boundaryRadius, boundaryRadius));
 	circle.setFillColor(sf::Color(0, 0, 0, 255));
@@ -32,4 +34,13 @@ void CityObject::draw(sf::RenderWindow * window)
 bool CityObject::isDestroyed() const
 {
 	return destroyed;
+}
+
+void CityObject::destroyCity()
+{
+	if (destroyed)
+		return;
+
+	destroyed = true;
+	circle.setFillColor(sf::Color(255, 0 ,0 ,255));
 }

@@ -26,6 +26,8 @@ public:
 
 	bool isDestroyed() const;
 
+	void destroyCity();
+
 private:
 	int destroyed;
 	int population;
