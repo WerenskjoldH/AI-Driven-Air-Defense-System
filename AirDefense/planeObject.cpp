@@ -1,7 +1,7 @@
 #include "planeObject.h"
 #include "world.h"
 
-PlaneObject::PlaneObject(float x, float y, CityObject * destinationCity) : WorldObject("ProjectileObject", sf::Vector2f(x, y), PLANE_SIZE)
+PlaneObject::PlaneObject(float x, float y, CityObject * destinationCity) : WorldObject("MissileObject", sf::Vector2f(x, y), PLANE_SIZE)
 {
 	circle.setRadius(boundaryRadius);
 	circle.setOrigin(sf::Vector2f(boundaryRadius, boundaryRadius));

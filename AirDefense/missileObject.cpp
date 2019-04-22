@@ -1,6 +1,6 @@
-#include "projectileObject.h"
+#include "MissileObject.h"
 
-ProjectileObject::ProjectileObject(float x, float y, CityObject * target) : WorldObject("ProjectileObject", sf::Vector2f(x, y), DEFAULT_PROJECTILE_SIZE)
+MissileObject::MissileObject(float x, float y, CityObject * target) : WorldObject("MissileObject", sf::Vector2f(x, y), DEFAULT_PROJECTILE_SIZE)
 {
 	circle.setRadius(boundaryRadius);
 	circle.setOrigin(sf::Vector2f(boundaryRadius, boundaryRadius));
@@ -13,12 +13,12 @@ ProjectileObject::ProjectileObject(float x, float y, CityObject * target) : Worl
 	targetCity = target;
 }
 
-ProjectileObject::~ProjectileObject()
+MissileObject::~MissileObject()
 {
 
 }
 
-void ProjectileObject::update(World * world, float dt)
+void MissileObject::update(World * world, float dt)
 {
 	position += speed * direction * dt;
 
@@ -37,13 +37,13 @@ void ProjectileObject::update(World * world, float dt)
 	}
 }
 
-void ProjectileObject::draw(sf::RenderWindow * window)
+void MissileObject::draw(sf::RenderWindow * window)
 {
 	circle.setPosition(position);
 	window->draw(circle);
 }
 
-void ProjectileObject::setSpawner(ProjectileSpawnerObject* s)
+void MissileObject::setSpawner(ProjectileSpawnerObject* s)
 {
 	spawner = s;
 }

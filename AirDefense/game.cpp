@@ -1,6 +1,6 @@
 #include "game.h"
 #include "cityObject.h"
-#include "projectileObject.h"
+#include "MissileObject.h"
 #include "projectileSpawnerObject.h"
 
 #include <stdio.h>
@@ -10,6 +10,12 @@ void Game::initialize()
 {
 	// Error message is built into function
 	defaultFont.loadFromFile("Fonts/slkscr.ttf");
+
+	circle.setFillColor(sf::Color(80, 80, 80, 255));
+	circle.setRadius(5);
+
+	mousePositionText.setCharacterSize(18);
+	mousePositionText.setPosition(0, 0);
 
 	initializeKeyboardSettings();
 	initializeSimulationSettings();
@@ -158,21 +164,15 @@ void Game::draw(sf::RenderWindow* window)
 	// TODO: Migrate this code so that we only draw and don't reinstantiate each draw. This is ~super~ inefficient!
 
 	// Draw the mouse
-	sf::CircleShape circle(5);
-	circle.setFillColor(sf::Color(80,80,80,255));
 	circle.setPosition(float(IM.mousePosition().x - 5), float(IM.mousePosition().y - 5));
 	window->draw(circle);
 
 	// Draw mouse position
-	sf::Text mousePositionText;
 	mousePositionText.setFont(defaultFont);
 	
-	char buffer[100];
 	sprintf_s(buffer, "Mouse Position: <%i, %i>", int(IM.mousePosition().x), int(IM.mousePosition().y));
 
 	mousePositionText.setString(buffer);
-	mousePositionText.setCharacterSize(18);
-	mousePositionText.setPosition(0,0);
 	window->draw(mousePositionText);
 }
 

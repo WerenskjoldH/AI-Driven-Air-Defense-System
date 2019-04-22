@@ -11,12 +11,12 @@
 #include "vectorUtility.h"
 #include "projectileSpawnerObject.h"
 
-class ProjectileObject : public WorldObject
+class MissileObject : public WorldObject
 {
 public:
-	ProjectileObject(float x, float y, CityObject* target);
+	MissileObject(float x, float y, CityObject* target);
 
-	virtual ~ProjectileObject();
+	virtual ~MissileObject();
 
 	void update(World* world, float dt);
 

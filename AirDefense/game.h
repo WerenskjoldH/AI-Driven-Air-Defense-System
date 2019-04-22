@@ -19,6 +19,10 @@ class Game
 private:
 	// This is the default font we will use
 	sf::Font defaultFont;
+	sf::Text mousePositionText;
+	char buffer[100];
+
+	sf::CircleShape circle;
 
 	World *world;
 

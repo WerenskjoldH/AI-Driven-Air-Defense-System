@@ -1,5 +1,5 @@
 #include "projectileSpawnerObject.h"
-#include "projectileObject.h"
+#include "MissileObject.h"
 #include "consoleColorer.h"
 #include "vectorUtility.h"
 #include "world.h"
@@ -95,7 +95,7 @@ void ProjectileSpawnerObject::addProjectile(World* world)
 	}
 
 	// Add projectile
-	ProjectileObject* projectileTempPtr = new ProjectileObject(x, y, (CityObject*)world->getWorldObjects().at(cityNum));
+	MissileObject* projectileTempPtr = new MissileObject(x, y, (CityObject*)world->getWorldObjects().at(cityNum));
 	projectileTempPtr->setSpawner(this);
 	world->addObject((WorldObject*)projectileTempPtr);
 }

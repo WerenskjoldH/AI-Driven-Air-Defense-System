@@ -10,7 +10,7 @@
 #include "worldObject.h"
 #include "cityObject.h"
 
-class PlaneObject : public WorldObject
+class PlaneObject : public WorldObject 
 {
 public:
 	PlaneObject(float x, float y, CityObject* destinationCity);
