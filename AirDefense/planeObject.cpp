@@ -1,7 +1,7 @@
 #include "planeObject.h"
 #include "world.h"
 
-PlaneObject::PlaneObject(float x, float y, CityObject * destinationCity) : WorldObject("MissileObject", sf::Vector2f(x, y), PLANE_SIZE)
+PlaneObject::PlaneObject(float x, float y, CityObject * destinationCity) : FlyingObject(x, y, PLANE_SIZE, "PlaneObject", destinationCity)
 {
 	circle.setRadius(boundaryRadius);
 	circle.setOrigin(sf::Vector2f(boundaryRadius, boundaryRadius));
@@ -10,8 +10,6 @@ PlaneObject::PlaneObject(float x, float y, CityObject * destinationCity) : World
 	speed = DEFAULT_PLANE_SPEED;
 
 	direction = vu::unit(destinationCity->getPosition() - sf::Vector2f(x, y));
-
-	destination = destinationCity;
 }
 
 PlaneObject::~PlaneObject()
@@ -23,13 +21,13 @@ void PlaneObject::update(World * world, float dt)
 {
 	position += speed * direction * dt;
 
-	if (intersects((WorldObject*)destination))
+	if (intersects((WorldObject*)targetCity))
 	{
 		this->setObjectDead();
 	}
 
 	// Find the closest city to detour to, else fly off into the oblivion and despawn
-	if (destination->isDestroyed())
+	if (targetCity->isDestroyed())
 	{
 		// Select closest city
 		int cityNum = 0;
@@ -50,12 +48,12 @@ void PlaneObject::update(World * world, float dt)
 
 		// No city found
 		if (a == INT_MAX)
-			destination == NULL;
+			targetCity == NULL;
 		else
 		{
-			destination = (CityObject*)world->getWorldObjects().at(cityNum);
+			targetCity = (CityObject*)world->getWorldObjects().at(cityNum);
 
-			direction = vu::unit(destination->getPosition() - getPosition());
+			direction = vu::unit(targetCity->getPosition() - getPosition());
 		}
 		
 	}

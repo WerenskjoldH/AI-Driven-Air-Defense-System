@@ -26,6 +26,7 @@ const int WorldObject::getID()
 {
 	return uniqueID;
 }
+
 void WorldObject::setID(int i)
 {
 	uniqueID = i;

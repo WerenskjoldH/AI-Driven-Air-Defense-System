@@ -1,16 +1,14 @@
-#include "MissileObject.h"
+#include "missileObject.h"
 
-MissileObject::MissileObject(float x, float y, CityObject * target) : WorldObject("MissileObject", sf::Vector2f(x, y), DEFAULT_PROJECTILE_SIZE)
+MissileObject::MissileObject(float x, float y, CityObject * target) : FlyingObject(x, y, DEFAULT_MISSILE_SIZE, "MissileObject", target)
 {
 	circle.setRadius(boundaryRadius);
 	circle.setOrigin(sf::Vector2f(boundaryRadius, boundaryRadius));
 	circle.setFillColor(sf::Color(150, 0, 60, 255));
 
-	speed = DEFAULT_PROJECTILE_SPEED;
+	speed = DEFAULT_MISSILE_SPEED;
 
 	direction = vu::unit(target->getPosition() - sf::Vector2f(x,y));
-
-	targetCity = target;
 }
 
 MissileObject::~MissileObject()

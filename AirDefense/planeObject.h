@@ -7,10 +7,9 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "worldObject.h"
-#include "cityObject.h"
+#include "flyingObject.h"
 
-class PlaneObject : public WorldObject 
+class PlaneObject : public FlyingObject 
 {
 public:
 	PlaneObject(float x, float y, CityObject* destinationCity);
@@ -22,14 +21,6 @@ public:
 	void draw(sf::RenderWindow* window);
 
 private:
-	// Add all properties here
-	sf::Vector2f direction;
-
-	float speed;
-
-	sf::CircleShape circle;
-
-	CityObject* destination;
 };
 
 #endif
