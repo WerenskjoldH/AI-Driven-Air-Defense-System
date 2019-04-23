@@ -1,21 +1,22 @@
 #ifndef RADAR_OBJECT_H
 #define RADAR_OBJECT_H
 
-#include <SFML/Graphics.hpp>
-#include "worldObject.h"
+#define RADAR_SIGHT_RADIUS 150.f
+#define RADAR_PHYSICAL_SIZE  5.f
 
-struct ProjectileData {
-	sf::Vector2f position;
-	sf::Vector2f predictedDirection;
-	float estimatedSpeed = 0.f;
-	// ThermalData
-};
+#include <SFML/Graphics.hpp>
+
+#include "worldObject.h"
+#include "defenseSystemObject.h"
+
+// Forward Declaration
+class DefenseSystemObject;
 
 class RadarObject : public WorldObject
 {
 
 public:
-	RadarObject(float x, float y, int population);
+	RadarObject(float x, float y);
 
 	virtual ~RadarObject();
 
@@ -23,9 +24,13 @@ public:
 
 	void draw(sf::RenderWindow* window);
 
+	void setDefenseSystem(DefenseSystemObject* defenseSystem);
+
 private:
 	sf::CircleShape circle;
+	sf::CircleShape sightRadiusCircle;
 
+	DefenseSystemObject* defenseSystem;
 };
 
 #endif

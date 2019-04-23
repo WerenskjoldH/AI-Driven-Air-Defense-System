@@ -13,6 +13,7 @@
 #include <SFML/OpenGL.hpp>
 
 #include "world.h"
+#include "defenseSystemObject.h"
 
 class Game
 {
@@ -25,6 +26,8 @@ private:
 	sf::CircleShape circle;
 
 	World *world;
+
+	DefenseSystemObject* defenseSystem;
 
 	void initialize();
 	void initializeWindowSettings(sf::RenderWindow* window);

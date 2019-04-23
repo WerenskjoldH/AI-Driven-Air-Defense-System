@@ -1,5 +1,6 @@
 #include "game.h"
 #include "cityObject.h"
+#include "radarObject.h"
 #include "MissileObject.h"
 #include "projectileSpawnerObject.h"
 
@@ -42,11 +43,20 @@ void Game::initializeKeyboardSettings()
 void Game::initializeSimulationSettings()
 {
 	world = new World(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	DefenseSystemObject* dso = new DefenseSystemObject();
+	defenseSystem = dso;
+	world->addObject((WorldObject*)dso);
+
 }
 
 void Game::reset()
 {
 	world->resetWorldAndRegenerateGeography();
+
+	DefenseSystemObject* dso = new DefenseSystemObject();
+	defenseSystem = dso;
+	world->addObject((WorldObject*)dso);
 }
 
 void Game::begin()
@@ -151,8 +161,14 @@ void Game::update(sf::RenderWindow* window, float dt)
 		world->addObject((WorldObject*)new ProjectileSpawnerObject());
 	}
 
-	if (IM.mousePress(MOUSE_LMB))
-	{}
+	// Left-clicking the mouse adds a radar
+	if (IM.mousePress(MOUSE_LMB) && world->checkIfLandAtMouse())
+	{
+		defenseSystem->addRadar(IM.mousePosition().x, IM.mousePosition().y, world);
+	}
+
+	// Right-clicking the mouse adds a SAM site
+	/// TODO
 	
 	world->update(window, dt);
 }
