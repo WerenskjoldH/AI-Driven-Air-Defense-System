@@ -168,7 +168,10 @@ void Game::update(sf::RenderWindow* window, float dt)
 	}
 
 	// Right-clicking the mouse adds a SAM site
-	/// TODO
+	if (IM.mousePress(MOUSE_RMB) && world->checkIfLandAtMouse())
+	{
+		defenseSystem->addSAMSite(IM.mousePosition().x, IM.mousePosition().y, world);
+	}
 	
 	world->update(window, dt);
 }

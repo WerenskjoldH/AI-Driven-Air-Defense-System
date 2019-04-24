@@ -21,10 +21,23 @@ public:
 
 	const char* getSubObjectType();
 
+	const bool getReachedDestination();
+	void setReachedDestination(bool tf);
+
+	const bool getDestroyed();
+
+	void destroyObject();
+
+	void allowDeletion();
+
 protected:
 	// Add all properties here
 	sf::Vector2f direction;
+
 	float speed;
+
+	bool reachedDestination;
+	bool destroyed = false;
 
 	char* subObjectType;
 

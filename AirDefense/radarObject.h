@@ -1,7 +1,7 @@
 #ifndef RADAR_OBJECT_H
 #define RADAR_OBJECT_H
 
-#define RADAR_SIGHT_RADIUS 150.f
+#define RADAR_SIGHT_RADIUS 120.f
 #define RADAR_PHYSICAL_SIZE  5.f
 
 #include <SFML/Graphics.hpp>

@@ -12,7 +12,7 @@ RadarObject::RadarObject(float x, float y) : WorldObject("RadarObject", sf::Vect
 
 	sightRadiusCircle.setRadius(RADAR_SIGHT_RADIUS);
 	sightRadiusCircle.setOrigin(sf::Vector2f(RADAR_SIGHT_RADIUS, RADAR_SIGHT_RADIUS));
-	sightRadiusCircle.setFillColor(sf::Color(0, 0, 155, 100));
+	sightRadiusCircle.setFillColor(sf::Color(120, 50, 100, 100));
 	sightRadiusCircle.setPosition(position);
 }
 
@@ -24,7 +24,7 @@ void RadarObject::update(World * world, float dt)
 	// When a projectile enters the radius, check if it exists in the system's observed objects vector
 	for (int i = 0; i < world->getNumberOfLivingObjects(); i++)
 	{
-		if (!(world->getWorldObjects().at(i)->getObjectType() == "FlyingObject"))
+		if (!(world->getWorldObjects().at(i)->getObjectType() == "FlyingObject") && !((FlyingObject*)world->getWorldObjects().at(i))->getReachedDestination())
 			continue;
 
 		FlyingObject* currentFlyingObject = (FlyingObject*)world->getWorldObjects().at(i);
@@ -33,8 +33,7 @@ void RadarObject::update(World * world, float dt)
 
 		if (distTemp < RADAR_SIGHT_RADIUS)
 		{
-			// Evaluate the object
-			
+			defenseSystem->updateProjectileInformation(currentFlyingObject);
 		}
 	}
 }

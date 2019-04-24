@@ -31,7 +31,8 @@ void MissileObject::update(World * world, float dt)
 		}
 
 		// Destroy this missile
-		this->setObjectDead();
+		//this->setObjectDead();
+		setReachedDestination(true);
 	}
 }
 

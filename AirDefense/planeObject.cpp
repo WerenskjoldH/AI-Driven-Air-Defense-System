@@ -23,7 +23,8 @@ void PlaneObject::update(World * world, float dt)
 
 	if (intersects((WorldObject*)targetCity))
 	{
-		this->setObjectDead();
+		//this->setObjectDead();
+		setReachedDestination(true);
 	}
 
 	// Find the closest city to detour to, else fly off into the oblivion and despawn

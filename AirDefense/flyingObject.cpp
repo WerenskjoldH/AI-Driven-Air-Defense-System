@@ -15,3 +15,32 @@ const char * FlyingObject::getSubObjectType()
 {
 	return subObjectType;
 }
+
+const bool FlyingObject::getReachedDestination()
+{
+	return reachedDestination;
+}
+
+void FlyingObject::setReachedDestination(bool tf)
+{
+	if (tf)
+	{
+		circle.setRadius(0.f);
+	}
+	reachedDestination = tf;
+}
+
+const bool FlyingObject::getDestroyed()
+{
+	return destroyed;
+}
+
+void FlyingObject::destroyObject()
+{
+	destroyed = true;
+}
+
+void FlyingObject::allowDeletion()
+{
+	this->setObjectDead();
+}
