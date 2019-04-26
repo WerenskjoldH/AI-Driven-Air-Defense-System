@@ -35,6 +35,8 @@ void DefenseSystemObject::update(World * world, float dt)
 	{
 		// Analyze objects in the list and determine if an object should be intercepted
 		/// Todo ///
+		if (it->object->getSubObjectType() != "MissileObject")
+			continue;
 
 		// If an object is to be intercepted then find the closest SAM site and fire a projectile to deactivate the threat
 		if (!it->beingTargeted)
