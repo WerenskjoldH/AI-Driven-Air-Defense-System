@@ -158,6 +158,10 @@ void Game::update(sf::RenderWindow* window, float dt)
 	
 	if (IM.keyRelease(sf::Keyboard::B))
 	{
+		SET_FONT_COLOR(FONT_GREEN);
+		printf("----Simulated Assault Has Begun----\n");
+		SET_FONT_COLOR();
+
 		world->addObject((WorldObject*)new ProjectileSpawnerObject());
 	}
 
