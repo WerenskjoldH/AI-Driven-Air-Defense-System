@@ -3,6 +3,7 @@
 #include "radarObject.h"
 #include "MissileObject.h"
 #include "projectileSpawnerObject.h"
+#include "agent.h"
 
 #include <stdio.h>
 #include <math.h>
@@ -20,6 +21,8 @@ void Game::initialize()
 
 	initializeKeyboardSettings();
 	initializeSimulationSettings();
+
+	IntelligentAgent::init("model.nnet");
 }
 
 void Game::initializeWindowSettings(sf::RenderWindow* window)

@@ -5,6 +5,8 @@
 
 #define PLANE_SIZE 4.f
 
+#define PLANE_SIG_NOISE_MULTIPLIER 5.f
+
 #include <SFML/Graphics.hpp>
 
 #include "flyingObject.h"
@@ -20,7 +22,10 @@ public:
 
 	void draw(sf::RenderWindow* window);
 
+	std::vector<float> generateSignature();
+
 private:
+	static const float baseSignature[];
 };
 
 #endif

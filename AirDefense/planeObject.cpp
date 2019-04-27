@@ -68,3 +68,25 @@ void PlaneObject::draw(sf::RenderWindow * window)
 	circle.setPosition(position);
 	window->draw(circle);
 }
+
+const float PlaneObject::baseSignature[] = {
+	0.,		0.,		0.,		1.,		0.,		0.,		1.,		12.,	22.,	35.,
+	6.,		2.,		2.,		1.,		0.,		0.,		0.,		18.,	162.,	153.,
+	90.,	22.,	17.,	15.,	10.,	9.,		13.,	25.,	33.,	37.,	35.
+};
+
+std::vector<float> PlaneObject::generateSignature()
+{
+	std::vector<float> sig;
+
+	int c = sizeof(baseSignature) / sizeof(*baseSignature);
+
+	for (int i = 0; i < c; i++)
+	{
+		float noisy = baseSignature[i] + PLANE_SIG_NOISE_MULTIPLIER * ((rand() - rand()) / (float)INT_MAX);
+		float normalized = (noisy - sigMean[i]) / sigStd[i];
+		sig.push_back(normalized);
+	}
+
+	return sig;
+}

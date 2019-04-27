@@ -1,4 +1,5 @@
 #include "defenseSystemObject.h"
+#include "agent.h"
 
 DefenseSystemObject::DefenseSystemObject() : WorldObject("DefenseSystemObject", sf::Vector2f(-10.f, -10.f))
 {
@@ -34,8 +35,7 @@ void DefenseSystemObject::update(World * world, float dt)
 	for (it = observedProjectiles.begin(); it != observedProjectiles.end(); it++)
 	{
 		// Analyze objects in the list and determine if an object should be intercepted
-		/// Todo ///
-		if (it->object->getSubObjectType() != "MissileObject")
+		if (it->threatRating == LOW || it->threatRating == MEDIUM)
 			continue;
 
 		// If an object is to be intercepted then find the closest SAM site and fire a projectile to deactivate the threat
@@ -103,6 +103,19 @@ void DefenseSystemObject::updateProjectileInformation(FlyingObject * flyingObjec
 		i = observedProjectiles.size();
 	}
 
+	ProjectileData proj = observedProjectiles.at(i-1);
+
 	// Update information in struct	
-	/// Todo
+	proj.predictedDirection = sf::Vector2f(
+		flyingObject->getPosition().x - proj.position.x,
+		flyingObject->getPosition().y - proj.position.y
+	);
+
+	proj.position = sf::Vector2f(flyingObject->getPosition());
+
+	proj.signature = proj.object->generateSignature();
+
+	proj.classPrediction = (proj.classPrediction + IntelligentAgent::predict(proj.signature)) / 2.f;
+
+	proj.threatRating = CLASS_TO_THREAT(proj.classPrediction);	
 }

@@ -8,6 +8,7 @@
 #include "radarObject.h"
 #include "flyingObject.h"
 #include "samSiteObject.h"
+#include "agent.h"
 
 // Forward Declaration
 class RadarObject;
@@ -20,12 +21,18 @@ enum ThreatLevel {
 	IMMEDIATE = 4
 };
 
+#define CLASS_TO_THREAT(x) \
+	(x < 0.33f) ? LOW : \
+	(x < 0.66f) ? MEDIUM : \
+	(x < 0.90f) ? HIGH : \
+	IMMEDIATE
+
 struct ProjectileData {
 	ProjectileData(FlyingObject* object, sf::Vector2f position) : object{ object }, position{ position }
 	{
-		// Set ThermalData here
-
-		threatRating = LOW;
+		signature = object->generateSignature();
+		classPrediction = IntelligentAgent::predict(signature);
+		threatRating = CLASS_TO_THREAT(classPrediction);
 	}
 
 	FlyingObject* object;
@@ -38,7 +45,8 @@ struct ProjectileData {
 	bool beingTargeted = false;
 
 	ThreatLevel threatRating;
-	// ThermalData
+	std::vector<float> signature;
+	float classPrediction = 0.f;
 };
 
 class DefenseSystemObject : public WorldObject

@@ -2,7 +2,10 @@
 #define PROJECTILE_OBJECT_H
 
 #define DEFAULT_MISSILE_SIZE 3.f
+
 #define DEFAULT_MISSILE_SPEED 100.f
+
+#define MISSILE_SIG_NOISE_MULTIPLIER 2.5f
 
 #include "projectileSpawnerObject.h"
 #include "flyingObject.h"
@@ -20,8 +23,12 @@ public:
 
 	void setSpawner(ProjectileSpawnerObject* s);
 
+	std::vector<float> generateSignature();
+
 private:
 	ProjectileSpawnerObject* spawner;
+
+	static const float MissileObject::baseSignature[];
 };
 
 #endif

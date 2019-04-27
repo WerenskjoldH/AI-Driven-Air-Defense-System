@@ -19,6 +19,8 @@ public:
 
 	virtual void draw(sf::RenderWindow* window) = 0;
 
+	virtual std::vector<float> generateSignature() = 0;
+
 	const char* getSubObjectType();
 
 	const bool getReachedDestination();
@@ -44,6 +46,10 @@ protected:
 	sf::CircleShape circle;
 
 	CityObject* targetCity;
+
+	static const float sigMean[];
+
+	static const float sigStd[];
 };
 
 #endif

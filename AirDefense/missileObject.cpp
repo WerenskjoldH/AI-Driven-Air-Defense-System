@@ -46,3 +46,25 @@ void MissileObject::setSpawner(ProjectileSpawnerObject* s)
 {
 	spawner = s;
 }
+
+const float MissileObject::baseSignature[] = {
+	15.,	17.,	30.,	29.,	21.,	13.,	45.,	68.,	120.,	105.,
+	40.,	18.,	25.,	16.,	14.,	9.,		7.,		7.,		47.,	380.,
+	325.,	121.,	38.,	20.,	16.,	17.,	17.,	18.,	19.,	15.,	11.
+};
+
+std::vector<float> MissileObject::generateSignature()
+{
+	std::vector<float> sig;
+
+	int c = sizeof(baseSignature) / sizeof(*baseSignature);
+
+	for (int i = 0; i < c; i++)
+	{
+		float noisy = baseSignature[i] + MISSILE_SIG_NOISE_MULTIPLIER * ((rand() - rand()) / (float)INT_MAX);
+		float normalized = (noisy - sigMean[i]) / sigStd[i];
+		sig.push_back(normalized);
+	}
+
+	return sig;
+}
