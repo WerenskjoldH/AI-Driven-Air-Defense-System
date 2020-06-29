@@ -20,9 +20,14 @@ class Game
 private:
 	// This is the default font we will use
 	sf::Font defaultFont;
+
+	// This is where we will print the mouse X,Y Coordinates
 	sf::Text mousePositionText;
+
+	// Change to std::string
 	char buffer[100];
 
+	// This will be used to replace the mouse pointer
 	sf::CircleShape circle;
 
 	World *world;

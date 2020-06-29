@@ -13,7 +13,7 @@ void Game::initialize()
 	// Error message is built into function
 	defaultFont.loadFromFile("Fonts/slkscr.ttf");
 
-	circle.setFillColor(sf::Color(80, 80, 80, 255));
+	circle.setFillColor(sf::Color(200, 200, 240, 255));
 	circle.setRadius(5);
 
 	mousePositionText.setCharacterSize(18);
