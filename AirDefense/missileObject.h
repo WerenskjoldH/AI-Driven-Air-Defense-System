@@ -28,7 +28,7 @@ public:
 private:
 	ProjectileSpawnerObject* spawner;
 
-	static const float MissileObject::baseSignature[];
+	static const float baseSignature[];
 };
 
 #endif
