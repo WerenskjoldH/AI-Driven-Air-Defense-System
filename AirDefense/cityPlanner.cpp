@@ -58,7 +58,7 @@ float scoreCity(World* world, Placement *p, int numberOfCities, int observedCity
 		{
 			distanceCovered = (DISTANCE_STEP_SIZE * step);
 
-			if (world->checkIfLandAtLocation(origin.x + direction.x * distanceCovered, origin.y + direction.y * distanceCovered) == 0)
+			if (world->checkIfLandAtLocation(origin.x + direction.x * distanceCovered, origin.y + direction.y * distanceCovered) == 0 || distanceCovered > world->getWorldWidth() && distanceCovered > world->getWorldHeight())
 				break;
 
 			step++;
@@ -124,7 +124,6 @@ City* performTrials(World *world, Geography *geography, int numberOfCitiesToTest
 		PLACEMENT(i)->cities = (City*)malloc(numberOfCitiesToTest * sizeof(City));
 
 		PLACEMENT(i)->overallWeight = scoreCities(world, geography, numberOfCitiesToTest, PLACEMENT(i));
-	
 		if (numberOfTrials > 0 && PLACEMENT(i)->overallWeight > PLACEMENT(0)->overallWeight)
 			std::swap(PLACEMENT(i), PLACEMENT(0));
 	}
@@ -149,7 +148,7 @@ void placeCities(World *world, Geography *geography, int numberOfCitiesToTest, i
 	}
 
 	// Free pointers then empty the vector
-	for(std::vector<Placement*>::iterator it = placements.begin(); it != placements.end(); ++it)
-		delete (*it);
+	//for(std::vector<Placement*>::iterator it = placements.begin(); it != placements.end(); ++it)
+	//	delete (*it);
 	placements.clear();
 }
