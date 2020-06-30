@@ -4,7 +4,7 @@
 
 World::World(int worldWidth, int worldHeight)
 {
-	geography = new Geography(worldWidth, worldHeight, 6, 0.5, 1, 0.4, 1996);
+	geography = new Geography(worldWidth, worldHeight, 6, 0.5f, 1, 0.4f, 1996);
 
 	initialize();
 }
