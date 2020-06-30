@@ -42,7 +42,7 @@ float scoreCity(World* world, Placement *p, int numberOfCities, int observedCity
 	if (world->getAltitudeAtLocation(OBSERVED_CITY.x, OBSERVED_CITY.y) < 0.8)
 		score += 3.f * proportionalScore;
 
-	// Score distance from others and connection - This could be cleaned up
+	// Score distance from others and connection - This could be cleaned up and improved, but a genetic algorithm 
 	for (int i = 0; i < numberOfCities; i++)
 	{
 		float dist = DISTANCE(OBSERVED_CITY.x, OBSERVED_CITY.y, p->cities[i].x, p->cities[i].y);
@@ -64,13 +64,13 @@ float scoreCity(World* world, Placement *p, int numberOfCities, int observedCity
 			step++;
 		}
 
-		// Cities are connected by land
+		// Cities are connected by land -- This is a questionable approach, but on average gives a very nice layout, so it remains
 		if (distanceCovered >= dist)
 			score += proportionalScore;
 	}
 
 	// Score near water only check above, below, left, and right to speed things up
-	if (   world->checkIfLandAtLocation(OBSERVED_CITY.x + 2.f * DISTANCE_STEP_SIZE, OBSERVED_CITY.y) 
+	if (world->checkIfLandAtLocation(OBSERVED_CITY.x + 2.f * DISTANCE_STEP_SIZE, OBSERVED_CITY.y) 
 		|| world->checkIfLandAtLocation(OBSERVED_CITY.x - 2.f * DISTANCE_STEP_SIZE, OBSERVED_CITY.y)
 		|| world->checkIfLandAtLocation(OBSERVED_CITY.x, OBSERVED_CITY.y + 2.f * DISTANCE_STEP_SIZE) 
 		|| world->checkIfLandAtLocation(OBSERVED_CITY.x, OBSERVED_CITY.y - 2.f * DISTANCE_STEP_SIZE))
@@ -148,7 +148,7 @@ void placeCities(World *world, Geography *geography, int numberOfCitiesToTest, i
 	}
 
 	// Free pointers then empty the vector
-	//for(std::vector<Placement*>::iterator it = placements.begin(); it != placements.end(); ++it)
-	//	delete (*it);
+	for(std::vector<Placement*>::iterator it = placements.begin(); it != placements.end(); ++it)
+		delete (*it);
 	placements.clear();
 }
