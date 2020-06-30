@@ -12,7 +12,7 @@ ObjectManager::ObjectManager()
 
 ObjectManager::~ObjectManager()
 {
-
+	
 }
 
 void ObjectManager::update(World *world, float dt)
