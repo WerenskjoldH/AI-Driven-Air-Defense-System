@@ -14,6 +14,7 @@
 class RadarObject;
 class SAMSiteObject;
 
+// Threat levels
 enum ThreatLevel {
 	LOW = 1,
 	MEDIUM = 2,
@@ -27,6 +28,7 @@ enum ThreatLevel {
 	(x < 0.90f) ? HIGH : \
 	IMMEDIATE
 
+// Contains all information on tracked projecticles
 struct ProjectileData {
 	ProjectileData(FlyingObject* object, sf::Vector2f position) : object{ object }, position{ position }
 	{
@@ -49,6 +51,7 @@ struct ProjectileData {
 	float classPrediction = 0.f;
 };
 
+// Manages its own defense system
 class DefenseSystemObject : public WorldObject
 {
 public:
@@ -57,13 +60,37 @@ public:
 
 	virtual ~DefenseSystemObject();
 
+	/*
+		Contains all update logic
+		@param window The RenderWindow we will be referencing, do NOT put draw calls here
+		@param dt the delta time between frames -- this can be static or dynamic
+	*/
 	void update(World* world, float dt);
 
+	/*
+		Contains all rendering logic
+		@param window The RenderWindow that we will be drawing to
+	*/
 	void draw(sf::RenderWindow* window);
 
+	/*
+		Creates a radar object and adds it to the world object manager
+		@param x X coordinate to place Radar
+		@param y Y coordinate to place Radar
+	*/
 	void addRadar(float x, float y, World* world);
+
+	/*
+		Creates a SAM object and adds it to the world object manager
+		@param x X coordinate to place SAM
+		@param y Y coordinate to place SAM
+	*/
 	void addSAMSite(float x, float y, World* world);
 
+	/*
+		Updates information logged on flying object observed by Radar
+		@param flyingObject The object being logged/updated
+	*/
 	void updateProjectileInformation(FlyingObject* flyingObject);
 
 private:
