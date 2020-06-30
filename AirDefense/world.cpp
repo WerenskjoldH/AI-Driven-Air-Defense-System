@@ -26,8 +26,10 @@ void World::update(sf::RenderWindow * window, float dt)
 
 void World::draw(sf::RenderWindow * window)
 {
+	// Draw the geography first
 	geography->drawLand(window);
 
+	// Draw the objects second, on top
 	objectManager.draw(window);
 }
 
@@ -52,6 +54,8 @@ int World::getNumberOfLivingObjects()
 	return objectManager.getNumberOfObjects();
 }
 
+// This function exists as a helper, I got tired of typing this on repeat
+// We could actually just make this a pre-processor call, or inline it
 bool World::checkIfLandAtMouse()
 {
 	return geography->checkIfLand(IM.mousePosition().x, IM.mousePosition().y);

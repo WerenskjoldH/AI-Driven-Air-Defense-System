@@ -16,12 +16,14 @@ void Game::initialize()
 	circle.setFillColor(sf::Color(200, 200, 240, 255));
 	circle.setRadius(5);
 
+	// Set the font size and text box top-left position
 	mousePositionText.setCharacterSize(18);
 	mousePositionText.setPosition(0, 0);
 
 	initializeKeyboardSettings();
 	initializeSimulationSettings();
 
+	// Initialize the intelligent agent with the neural net model
 	IntelligentAgent::init("model.nnet");
 }
 
@@ -76,7 +78,6 @@ void Game::begin()
 
 	/// Game Loop Logic
 
-	// This is the Game Loop
 	while (window.isOpen())
 	{
 		sf::Event e;
@@ -187,7 +188,7 @@ void Game::draw(sf::RenderWindow* window)
 {
 	world->draw(window);
 
-	// TODO: Migrate this code so that we only draw and don't reinstantiate each draw. This is ~super~ inefficient!
+	// TODO: Rasterize static objects on same layer, make it one draw call
 
 	// Draw the mouse
 	circle.setPosition(float(IM.mousePosition().x - 5), float(IM.mousePosition().y - 5));
@@ -209,4 +210,6 @@ Game::Game()
 
 Game::~Game()
 {
+	delete world;
+	delete defenseSystem;
 }
