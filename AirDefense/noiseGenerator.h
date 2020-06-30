@@ -11,7 +11,7 @@ inline static float cosineInterpolation(float a, float b, float x)
 }
 
 // This is a commonly used function to generate a noise field
-// It uses prime numbers as non-prime numbers create distict patterns
+// It uses prime numbers (non-prime numbers create distict patterns) to generate a random, in appearance, field
 inline static float getNoise(float nX, float nY)
 {
 	int n = (int)nX + (int)nY * 57;
