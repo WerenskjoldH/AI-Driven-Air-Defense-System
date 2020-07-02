@@ -32,6 +32,8 @@ void CityObject::update(World * world, float dt)
 	if (isDestroyed())
 		return;
 
+	// Deals with sending planes to closest live city
+	// This can and should be done in a less redundant way
 	if (timeAccumulator >= spawnTime)
 	{
 		// Select closest city
