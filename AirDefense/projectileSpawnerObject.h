@@ -14,10 +14,20 @@ public:
 
 	virtual ~ProjectileSpawnerObject();
 
+	/*
+		Contains all update logic
+		@param world The world this city object will interact with
+		@param dt the delta time between frames -- this can be static or dynamic
+	*/
 	void update(World* world, float dt);
 
+	/*
+		Contains all rendering logic
+		@param window The RenderWindow that we will be drawing to
+	*/
 	void draw(sf::RenderWindow* window);
 
+	// Increments the number of destroyed cities
 	void incrementDestroyedCities();
 
 private:
@@ -29,7 +39,10 @@ private:
 
 	bool ceaseFire;
 
-	// Spawn missile
+	/*
+		Spawns a missile object
+		@param world World to spawn the missile into
+	*/
 	void addProjectile(World* world);
 };
 
