@@ -12,7 +12,7 @@ class WorldObject
 {
 public:
 
-	// Having to hand name each derived class is unfortunate, but quick
+	// Having to hand name each derived class is unfortunate, but a simple solution for the scope of this project
 	/*
 		@param objectType Pass a string identifier of the objectType for quick identification
 		@param position Where the object will be placed in the world
