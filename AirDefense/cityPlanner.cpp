@@ -1,7 +1,7 @@
 #include "cityPlanner.h"
-#include "worldObjectFactory.h"
 #include "world.h"
 #include "geography.h"
+#include "cityObject.h"
 
 #include <vector>
 
