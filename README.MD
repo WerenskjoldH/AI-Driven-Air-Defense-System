@@ -2,10 +2,7 @@
 
 <h4 align="center">A project built to experiment with a neural-network-based AI missile defense system
 
-<!--
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
--->
-
 [![Repository Size](https://img.shields.io/github/repo-size/WerenskjoldH/AI-Driven-Air-Defense-System)]()
 
 </h4>
