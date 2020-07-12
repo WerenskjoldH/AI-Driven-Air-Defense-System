@@ -71,6 +71,16 @@ For the shaders to be able to run you will need a GPU and drivers that support O
 
 ---
 
+## Support
+
+If you are looking for support please send a non-spammy looking email to Rilliden@gmail.com. If you are unsure what to write for the title, try something in this format:
+
+```
+[Repository Name] <Question>
+```
+
+---
+
 ## Q&A
 
 ### _Q_: I compiled and built the project, but when I tried to run it I got **x** error! What happened?!?
